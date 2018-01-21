@@ -1,0 +1,89 @@
+<view class="orderinfor">
+  <view class="orderinfor-description">
+
+    <view class="weui-cells__title">套餐名称</view>
+    <view class="orderinfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{orderName}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">订单号</view>
+        <view class="weui-cell__ft">{{orderSn}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">付款状态</view>
+        <view class="weui-cell__ft">{{payStatus}}</view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">人员数量</view>
+    <view class="orderinfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">房间数</view>
+        <view class="weui-cell__ft">{{roomNum}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">总人数</view>
+        <view class="weui-cell__ft">{{peopleNum}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">成人数</view>
+        <view class="weui-cell__ft">{{adultNum}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">儿童数</view>
+        <view class="weui-cell__ft">{{childNum}}</view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">时间周期</view>
+    <view class="orderinfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">入住日期</view>
+        <view class="weui-cell__ft">{{checkIn}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">退房日期</view>
+        <view class="weui-cell__ft">{{checkOut}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">周期长度</view>
+        <view class="weui-cell__ft">{{cycleLength}}</view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">详细金额</view>
+    <view class="orderinfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">产品金额</view>
+        <view class="weui-cell__ft">{{productAmount}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">优惠金额</view>
+        <view class="weui-cell__ft">{{discount}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">订单总额</view>
+        <view class="weui-cell__ft">{{orderAmount}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">计算方式</view>
+        <view class="weui-cell__ft">{{calMethod}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">已付金额</view>
+        <view class="weui-cell__ft">{{payAmount}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">未付金额</view>
+        <view class="weui-cell__ft">{{notPayAmount}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="orderinfor-operate">
+    <view class="WingBlank">
+      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToOrderInfor">填写订单</button>
+    </view>
+  </view>
+</view>

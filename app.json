@@ -1,0 +1,15 @@
+{
+  "pages":[
+    "pages/orderinfor/index",
+    "pages/terms/index",
+    "pages/home/index",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "潜游时光",
+    "navigationBarTextStyle": "black"
+  }
+}

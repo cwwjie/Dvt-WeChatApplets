@@ -1,0 +1,46 @@
+<view class="home">
+  <view class="home-title WingBlank">Diving Time 潜游时光</view>
+  <view class="home-subtitle WingBlank">客服信息收集</view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../terms/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">条款声明</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../orderinfor/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">订单信息</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">预订人信息</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">入住信息</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">航班信息</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="home-list weui-cells weui-cells_after-title">
+    <navigator url="./../index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">特别注意</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>

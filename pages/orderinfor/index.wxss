@@ -1,0 +1,33 @@
+page {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f9;
+}
+
+.orderinfor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.orderinfor .orderinfor-interval {
+  margin-bottom: 35rpx;
+}
+
+/** description **/
+.orderinfor .orderinfor-description {
+  margin-bottom: 175rpx;
+}
+
+/** operate **/
+.orderinfor .orderinfor-operate {
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  width: 100%;
+}
+
+.orderinfor .orderinfor-operate .WingBlank {
+  padding: 20rpx 35rpx;
+}

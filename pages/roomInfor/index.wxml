@@ -1,0 +1,25 @@
+<view class="roomInfor">
+  <view class="roomInfor-main">
+    <view class="main-room WingBlank">
+
+      <view class="room-item">
+        <view class="room-item-header">
+          <image src='./../../assets/hotel.png'></image>
+          <text class="room-header-tiltle">房间</text>
+          <text class="room-header-status isComplete">待完成</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="roomInfor-operate">
+    <view class="WingBlank">
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
+      </view>
+      <view class="btn-content">
+        <button class="weui-btn"  type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
+      </view>
+    </view>
+  </view>
+</view>

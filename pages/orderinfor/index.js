@@ -19,5 +19,13 @@ Page({
     'calMethod': '100 + 1 ?= 123',
     'payAmount': 500,
     'notPayAmount': 4000,
+  },
+
+  jumpBack: function () {
+    wx.navigateBack();
+  },
+
+  jumpToNext: function () {
+    
   }
 })

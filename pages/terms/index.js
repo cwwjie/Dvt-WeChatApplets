@@ -14,7 +14,7 @@ Page({
   jumpToOrderInfor: function () {
     if (this.data.isRead) {
       wx.navigateTo({
-        url: './../orderinfor/index'
+        url: './../orderInfor/index'
       })
     }
   }

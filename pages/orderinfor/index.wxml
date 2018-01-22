@@ -83,7 +83,12 @@
 
   <view class="orderinfor-operate">
     <view class="WingBlank">
-      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToOrderInfor">填写订单</button>
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
+      </view>
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
+      </view>
     </view>
   </view>
 </view>

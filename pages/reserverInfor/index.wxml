@@ -1,0 +1,91 @@
+<view class="reserverInfor">
+  <view class="reserverInfor-main">
+
+    <view class="weui-cells__title">预订人姓名(中文)</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="{{signNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名中文</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{signName}}" bindinput="handleSignName" placeholder="请输入中文姓名"/>
+        </view>
+        <view id="signNameError" class="weui-cell__ft" wx:if="{{signNameError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">预订人姓名(拼音)</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="{{pinyinNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名拼音</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{pinyinName}}" bindinput="handlePinyinName" placeholder="请输入姓名拼音"/>
+        </view>
+        <view id="pinyinNameError" class="weui-cell__ft" wx:if="{{pinyinNameError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">付款人账号</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="{{payAccountError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">账号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{payAccount}}" bindinput="handlePayAccount" placeholder="淘宝/支付宝/微信"/>
+        </view>
+        <view id="payAccountError" class="weui-cell__ft" wx:if="{{payAccountError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">预定人手机号码/电话</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="{{mobileError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机电话</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input type="number" class="weui-input" value="{{mobile}}" bindinput="handleMobile" placeholder="请输入预定人的手机号码/电话"/>
+        </view>
+        <view id="mobileError" class="weui-cell__ft" wx:if="{{mobileError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">预定人邮箱</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="{{emailError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮箱</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{email}}" bindinput="handleEmail" placeholder="请输入预定人的邮箱"/>
+        </view>
+        <view id="emailError" class="weui-cell__ft" wx:if="{{emailError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="reserverInfor-operate">
+    <view class="WingBlank">
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
+      </view>
+      <view class="btn-content">
+        <button class="weui-btn"  type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
+      </view>
+    </view>
+  </view>
+</view>

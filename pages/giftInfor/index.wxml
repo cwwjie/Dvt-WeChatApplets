@@ -1,0 +1,67 @@
+<view class="giftInfor">
+  <view class="giftInfor-description">
+
+    <view class="weui-cells__title">潜游时光赠送项目</view>
+    <view class="giftInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell" bindtap="showDescription" >
+        <view class="weui-cell__bd">赠送说明</view>
+        <view wx:if="{{!isShowDescription}}" class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+      <view class="{{isShowDescription ? 'giftInfor-extra-item giftInfor-extra-show' : 'giftInfor-extra-item'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">2-3人每人赠送“保游全球”畅游海外旅行保障A计划或一次往返亚庇机场到市区酒店的接送（时间为6:05-21:55之间，超出时间需付35元夜间服务费）</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">4-7人每人赠送“保游全球”畅游海外旅行保障A计划和一次往返亚庇机场到市区酒店的接送（时间不限）</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">1. 免费提供给客户的是1-10天的A计划，如增加天数或选择计划B，客户需自补差价；</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">A计划：1-10天17元/人，11-20天29元/人，21-25天41元/人，26-30天58元/人。</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">B计划：1-10天28元/人，11-20天41元/人，21-25天52元/人，26-30天73元/人。</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">2. 临时预定需自行购买保险，如未填写亚庇接送，默认赠送保险。</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">赠送保险</view>
+    <view class="giftInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">“保游全球”畅游海外旅行保障A计划</view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">保险期间</view>
+    <view class="giftInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{insurance}}</view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">接送</view>
+    <view class="giftInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">1 次往返亚庇机场 -- 市区酒店的接送,免费接机时间段为 6:05-21:55，超出时间需另付35元</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{transfersInfo}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="giftInfor-operate">
+    <view class="WingBlank">
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
+      </view>
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
+      </view>
+    </view>
+  </view>
+</view>

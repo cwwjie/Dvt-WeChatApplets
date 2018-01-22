@@ -1,6 +1,9 @@
 {
   "pages":[
-    "pages/orderinfor/index",
+    "pages/roomInfor/index",
+    "pages/giftInfor/index",
+    "pages/reserverInfor/index",
+    "pages/orderInfor/index",
     "pages/terms/index",
     "pages/home/index",
     "pages/index/index",

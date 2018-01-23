@@ -1,0 +1,65 @@
+<view class="flightInfor">
+  <view class="flightInfor-main">
+
+    <view class="weui-cells__title">行程套餐</view>
+    <view class="flightInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">上岛日期</view>
+        <view class="weui-cell__ft">{{checkIn}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">离岛日期</view>
+        <view class="weui-cell__ft">{{checkOut}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">周期长度</view>
+        <view class="weui-cell__ft">{{cycleLength}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{template === 3}}" class="weui-cells__title">马来西亚抵达日期</view>
+    <view wx:if="{{template === 3}}" class="flightInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">航班号码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input id="outboundNum" class="weui-input" value="{{outboundNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选择日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker id="landDate" mode="date" value="{{landDate}}" bindchange="handlebyId">
+            <view class="weui-input">{{landDate}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选择时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker id="landTime" mode="time" value="{{landTime}}" bindchange="handlebyId">
+            <view class="weui-input">{{landTime}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    
+
+  </view>
+
+  <view class="flightInfor-operate">
+    <view class="WingBlank">
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
+      </view>
+      <view class="btn-content">
+        <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
+      </view>
+    </view>
+  </view>
+</view>

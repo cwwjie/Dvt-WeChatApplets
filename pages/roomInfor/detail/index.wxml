@@ -1,0 +1,57 @@
+<view class="roomInfor-detail">
+  <view class="roomInfor-detail-main">
+
+    <view class="weui-cells__title">房间床型</view>
+    <view class="reserverInfor-interval weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选择床型</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerChange" value="{{bedType}}" range="{{bedTypeList}}" bindchange="bedTypeChange">
+            <view class="weui-input">{{bedTypeList[bedType]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">入住信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">还可入住 1 人</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">添加入住信息/已住满</view>
+      </view>
+    </view>
+
+    <view class="weui-form-preview roomInfor-detail-customer-preview">
+      <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__label">旅客信息1</view>
+          <view class="weui-form-preview__value_in-hd">曾杰杰</view>
+      </view>
+      <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">国籍</view>
+              <view class="weui-form-preview__value">CHINA</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">生日</view>
+              <view class="weui-form-preview__value">2018-1-23</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">电话</view>
+              <view class="weui-form-preview__value">15976713287</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">删除</view>
+        <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">编辑</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="roomInfor-detail-operate">
+    <view class="WingBlank">
+      <button class="weui-btn" type="{{buttonType}}" bindtap="saveConfirm">确认</button>
+    </view>
+  </view>
+</view>

@@ -24,10 +24,15 @@ page {
   padding-top: 20rpx;
 }
 
+/** room item **/
+.roomInfor .room-item-content {
+  padding-bottom: 20rpx;
+}
+
 .roomInfor .room-item {
   position: relative;
   background: #fff;
-  border-radius: 5rpx;
+  border-radius: 7rpx;
   border: 1rpx solid #ddd;
 }
 
@@ -35,12 +40,18 @@ page {
   display: flex;
   align-items: center;
   padding: 20rpx;
+  border-bottom: 1rpx solid #ddd;
 }
 
 .roomInfor .room-item-header image {
   display: inline-block;
   width: 48rpx;
   height: 48rpx;
+}
+
+.roomInfor .room-item-header text {
+  font-size: 16pt;
+  line-height: 24pt;
 }
 
 .roomInfor .room-header-tiltle {
@@ -50,10 +61,45 @@ page {
 .roomInfor .room-header-status {
   position: absolute;
   right: 35rpx;
+  color: #353535;
 }
 
 .roomInfor .room-item-header .isComplete {
   color: #F56C6C;
+}
+
+.roomInfor .room-item-body {
+  padding: 20rpx 20rpx 5rpx 20rpx;
+}
+
+.roomInfor .room-item-body view {
+  font-size: 14pt;
+  line-height: 22pt;
+}
+
+.roomInfor .room-item-footer {
+  position: relative;
+  padding: 5rpx 20rpx;
+}
+
+.roomInfor .room-item-footer view {
+  font-size: 12pt;
+  line-height: 20pt;
+}
+
+.roomInfor .room-item-footer .item-footer-left {
+  color: #888888;
+}
+
+.roomInfor .room-item-footer .item-footer-right {
+  position: absolute;
+  top: 5rpx;
+  right: 20rpx;
+  color: #409EFF;
+}
+
+/** room gather **/
+.roomInfor .room-infor-gather {
 }
 
 /** operate **/

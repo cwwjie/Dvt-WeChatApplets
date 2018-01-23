@@ -1,0 +1,152 @@
+<view class="roomInfor-customer">
+  <view class="roomInfor-customer-main">
+
+    <view class="weui-cells__title">填写房间入住信息</view>
+
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">护照号码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{passportNo}}" bindinput="handlePassportNo" placeholder="请输入护照号码"/>
+        </view>
+      </view>
+
+      <view class="{{pinyinNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名中文</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{chineseName}}" bindinput="handleChineseName" placeholder="请输入中文姓名"/>
+        </view>
+        <view id="pinyinNameError" class="weui-cell__ft" wx:if="{{chineseNameError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="{{pinyinNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名拼音</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{pinyinName}}" bindinput="handlePinyinName" placeholder="请输入姓名拼音"/>
+        </view>
+        <view id="pinyinNameError" class="weui-cell__ft" wx:if="{{pinyinNameError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="{{mobileError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机号码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{mobile}}" bindinput="handleMobile" placeholder="请输入手机号码"/>
+        </view>
+        <view id="mobileError" class="weui-cell__ft" wx:if="{{mobileError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选择性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerChange" value="{{gender}}" range="{{genderList}}" bindchange="genderChange">
+            <view class="weui-input">{{genderList[gender]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选择国籍</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerChange" value="{{nationality}}" range="{{nationalityList}}" bindchange="nationalityChange">
+            <view class="weui-input">{{nationalityList[nationality]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">出生日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{birthday}}" start="1917-01-01" end="2018-01-01" bindchange="birthdayChange">
+            <view class="weui-input">{{birthday}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__hd">
+          <view class="weui-label">潜水类型</view>
+        </view>
+        <view class="weui-cell__bd">{{isDive ? '深潜' : '浮潜'}}</view>
+        <view class="weui-cell__ft">
+          <switch checked="{{isDive}}" bindchange="isDiveChange"/>
+        </view>
+      </view>
+
+      <view wx:if="{{isDive}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">潜水证号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{divingNo}}" bindinput="handleDivingNo" placeholder="请输入潜水证号"/>
+        </view>
+      </view>
+
+      <view wx:if="{{isDive}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">潜水次数</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{divingCount}}" bindinput="handleDivingCount" placeholder="请输入潜水次数"/>
+        </view>
+      </view>
+
+      <view wx:if="{{isDive}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">潜水级别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerChange" value="{{divingRank}}" range="{{divingRankList}}" bindchange="divingRankChange">
+            <view class="weui-input">{{divingRankList[divingRank]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view wx:if="{{isDive}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">上次潜水</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{lastDiveTime}}" start="1917-01-01" end="2020-01-01" bindchange="lastDiveTimeChange">
+            <view class="weui-input">{{lastDiveTime}}</view>
+          </picker>
+        </view>
+      </view>
+  
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">以往病史</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{anamnesis}}" bindinput="handleAnamnesis" placeholder="以往重大病史"/>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="roomInfor-customer-operate">
+    <view class="WingBlank">
+      <button class="weui-btn" type="{{buttonType}}" bindtap="saveConfirm">确认</button>
+    </view>
+  </view>
+</view>

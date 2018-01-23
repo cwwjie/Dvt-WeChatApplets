@@ -1,5 +1,8 @@
 {
   "pages":[
+    "pages/flightInfor/index",
+    "pages/roomInfor/customer/index",
+    "pages/roomInfor/detail/index",
     "pages/roomInfor/index",
     "pages/giftInfor/index",
     "pages/reserverInfor/index",

@@ -1,0 +1,37 @@
+page {
+  background: #f5f5f9;
+}
+
+.flightInfor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.flightInfor .flightInfor-interval {
+  margin-bottom: 35rpx;
+}
+
+/** main **/
+.flightInfor .flightInfor-main {
+  margin-bottom: 175rpx;
+}
+
+/** operate **/
+.flightInfor .flightInfor-operate {
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  width: 100%;
+}
+
+.flightInfor .flightInfor-operate .WingBlank {
+  padding: 20rpx 0rpx 10rpx;
+}
+
+.flightInfor .flightInfor-operate .btn-content {
+  display: inline-block;
+  padding: 0px 5%;
+  width: 40%;
+}

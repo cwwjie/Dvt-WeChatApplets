@@ -1,13 +1,77 @@
 <view class="roomInfor">
   <view class="roomInfor-main">
-    <view class="main-room WingBlank">
+    <view class="main-room">
 
-      <view class="room-item">
-        <view class="room-item-header">
-          <image src='./../../assets/hotel.png'></image>
-          <text class="room-header-tiltle">房间</text>
-          <text class="room-header-status isComplete">待完成</text>
+      <view class="room-item-content WingBlank">
+        <view class="room-item">
+          <view class="room-item-header">
+            <image src='./../../assets/hotel.png'></image>
+            <text class="room-header-tiltle">房间</text>
+            <text class="room-header-status isComplete">待完成</text>
+          </view>
+          <view class="room-item-body">
+            <view>床型: 大床</view>
+            <view>旅客: 1 人</view>
+          </view>
+          <view class="room-item-footer">
+            <view class="item-footer-left">还可入住 0-1 人</view>
+            <view class="item-footer-right">点击补充信息</view>
+          </view>
         </view>
+      </view>
+
+      <view class="room-infor-gather">
+        <view class="weui-cells__title">紧急联系人信息</view>
+        <view class="weui-cells weui-cells_after-title">
+
+          <view class="{{iceNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+            <view class="weui-cell__hd">
+              <view class="weui-label">姓名中文</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value="{{iceName}}" bindinput="handleIceName" placeholder="请输入紧急联系人姓名"/>
+            </view>
+            <view id="iceNameError" class="weui-cell__ft" wx:if="{{iceNameError !== ''}}" bindtap="showError">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">联系人关系</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindPickerChange" value="{{iceRelation}}" range="{{iceRelationArray}}" bindchange="iceRelationChange">
+                <view class="weui-input">{{iceRelationArray[iceRelation]}}</view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="{{iceMobileError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+            <view class="weui-cell__hd">
+              <view class="weui-label">手机电话</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input type="number" class="weui-input" value="{{iceMobile}}" bindinput="handleIceMobile" placeholder="请输入紧急联系人手机/电话"/>
+            </view>
+            <view id="iceMobileError" class="weui-cell__ft" wx:if="{{iceMobileError !== ''}}" bindtap="showError">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+
+          <view class="{{iceEmailError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+            <view class="weui-cell__hd">
+              <view class="weui-label">邮箱账号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value="{{iceEmail}}" bindinput="handleIceEmail" placeholder="请输入紧急联系人邮箱"/>
+            </view>
+            <view id="iceEmailError" class="weui-cell__ft" wx:if="{{iceEmailError !== ''}}" bindtap="showError">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+
       </view>
     </view>
   </view>

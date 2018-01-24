@@ -1,4 +1,0 @@
-<!--index.wxml-->
-<view class="container">
-  <button bindtap="jumpToHome">jump To Home</button>
-</view>

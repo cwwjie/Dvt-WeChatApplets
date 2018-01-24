@@ -1,0 +1,28 @@
+<view class="result">
+  <view wx:if="{{status === 'success'}}" class="result-content result-success">
+    <view  class="result-icon">
+      <icon type="success" size="93"></icon>
+    </view>
+    <view class="result-description">恭喜你, 提交成功</view>
+    <view class="result-button">
+      <button class="weui-btn" type="primary">查看提交信息</button>
+    </view>
+  </view>
+  <view wx:if="{{status === 'failure'}}" class="result-content result-failure">
+    <view  class="result-icon">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="result-description">非常抱歉, 发生错误!</view>
+    <view class="result-infor">原因: {{error}}</view>
+    <view class="result-button">
+      <button class="weui-btn result-copy-error" plain="true" bindtap="copyError">复制错误信息</button>
+      <button class="weui-btn" type="default" plain="true">返回</button>
+    </view>
+  </view>
+  <view wx:if="{{status === 'waiting'}}" class="result-content result-failure">
+    <view  class="result-icon">
+      <icon type="waiting" size="93"></icon>
+    </view>
+    <view class="result-description">正 在 提 交</view>
+  </view>
+</view>

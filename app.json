@@ -1,5 +1,7 @@
 {
-  "pages":[
+  "pages": [
+    "pages/home/index",
+    "pages/specialNote/index",
     "pages/flightInfor/index",
     "pages/roomInfor/customer/index",
     "pages/roomInfor/detail/index",
@@ -8,11 +10,9 @@
     "pages/reserverInfor/index",
     "pages/orderInfor/index",
     "pages/terms/index",
-    "pages/home/index",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/result/index"
   ],
-  "window":{
+  "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "潜游时光",

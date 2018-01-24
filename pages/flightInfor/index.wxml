@@ -1,54 +1,705 @@
 <view class="flightInfor">
   <view class="flightInfor-main">
 
-    <view class="weui-cells__title">行程套餐</view>
-    <view class="flightInfor-interval weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">上岛日期</view>
-        <view class="weui-cell__ft">{{checkIn}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">离岛日期</view>
-        <view class="weui-cell__ft">{{checkOut}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">周期长度</view>
-        <view class="weui-cell__ft">{{cycleLength}}</view>
-      </view>
-    </view>
+    <view class="flightInfor-input">
 
-    <view wx:if="{{template === 3}}" class="weui-cells__title">马来西亚抵达日期</view>
-    <view wx:if="{{template === 3}}" class="flightInfor-interval weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">航班号码</view>
+      <view class="weui-cells__title">行程套餐</view>
+      <view class="flightInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">上岛日期</view>
+          <view class="weui-cell__ft">{{flightinfor.checkIn}}</view>
         </view>
-        <view class="weui-cell__bd">
-          <input id="outboundNum" class="weui-input" value="{{outboundNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">离岛日期</view>
+          <view class="weui-cell__ft">{{flightinfor.checkOut}}</view>
         </view>
-      </view>
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">选择日期</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker id="landDate" mode="date" value="{{landDate}}" bindchange="handlebyId">
-            <view class="weui-input">{{landDate}}</view>
-          </picker>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">周期长度</view>
+          <view class="weui-cell__ft">{{flightinfor.cycleLength}}</view>
         </view>
       </view>
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">选择时间</view>
+
+      <view wx:if="{{template === 3}}" class="weui-cells__title">马来西亚抵达日期</view>
+      <view wx:if="{{template === 3}}" class="flightInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">航班号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id="outboundNum" class="weui-input" value="{{outboundNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+          </view>
         </view>
-        <view class="weui-cell__bd">
-          <picker id="landTime" mode="time" value="{{landTime}}" bindchange="handlebyId">
-            <view class="weui-input">{{landTime}}</view>
-          </picker>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="landDate" mode="date" value="{{landDate}}" bindchange="handlebyId">
+              <view class="weui-input">{{landDate}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="landTime" mode="time" value="{{landTime}}" bindchange="handlebyId">
+              <view class="weui-input">{{landTime}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">{{ (template === 11 || template === 12 || template === 13 || template === 14) ? '马来西亚' : '斗湖'}}抵达日期</view>
+      <view class="flightInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">航班号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id="inHarbourNum" class="weui-input" value="{{inHarbourNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="hLandDate" mode="date" value="{{hLandDate}}" bindchange="handlebyId">
+              <view class="weui-input">{{hLandDate}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="hLandTime" mode="time" value="{{hLandTime}}" bindchange="handlebyId">
+              <view class="weui-input">{{hLandTime}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">{{ (template === 11 || template === 12 || template === 13 || template === 14) ? '马来西亚' : '斗湖'}}离开日期</view>
+      <view class="flightInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">航班号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id="outHarbourNum" class="weui-input" value="{{outHarbourNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="hTakeoffDate" mode="date" value="{{hTakeoffDate}}" bindchange="handlebyId">
+              <view class="weui-input">{{hTakeoffDate}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="hTakeoffTime" mode="time" value="{{hTakeoffTime}}" bindchange="handlebyId">
+              <view class="weui-input">{{hTakeoffTime}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 3}}" class="weui-cells__title">马来西亚离开日期</view>
+      <view wx:if="{{template === 3}}" class="flightInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">航班号码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id="inboundNum" class="weui-input" value="{{inboundNum}}" bindinput="handlebyId" placeholder="请输入航班号"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择日期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="takeoffDate" mode="date" value="{{takeoffDate}}" bindchange="handlebyId">
+              <view class="weui-input">{{takeoffDate}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">选择时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker id="takeoffTime" mode="time" value="{{takeoffTime}}" bindchange="handlebyId">
+              <view class="weui-input">{{takeoffTime}}</view>
+            </picker>
+          </view>
         </view>
       </view>
     </view>
     
+    <view class="flightInfor-description">
+
+      <view wx:if="{{template === 1}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">斗湖机场 - 中转酒店</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 提前一天15：00前到达的航班仅接送至斗湖市区HERITAGE HOTEL（需提供预订码），或者送至仙本那的SEAFEST HOTEL与DRAGON INN。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 提前一天15：00后到达的航班仅接送至斗湖市区的HERITAGE HOTEL（需要提供入住预订码）</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 10：00</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 12：00</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 16：30</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">中转酒店接送时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 住斗湖酒店的客人7：30AM在酒店大堂等待接送</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 住仙本那酒店的客人9：00AM在酒店大堂等待接送</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">马达京度假村离岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">11：00/14：00</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">马达京度假村 - 中转酒店</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 离岛后可送至斗湖市区的酒店</view>
+            </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 离岛后可送至仙本那海丰酒店和DRAGON INN。</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">马达京度假村 - 机场</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 离岛当天可送至机场，离岛后第二天起请自行前往机场。</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘11点的船离岛买15点后的航班，乘14点的船离岛买18点后的航班。</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 2}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">斗湖机场 - 仙本那</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 15点之前到斗湖机场的可以接机送上岛</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 提前一天15点前到斗湖机场可送到仙本那酒店（斗湖酒店需自行前往），第二天9:30在酒店大堂等接上岛。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 其他时间到达，需自行前往酒店。</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 10：00</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 12：00</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 16：30</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">马达京度假村 - 机场</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 07：30AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 11：00AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 14：00PM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离岛第二天不送机</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘6点的船离岛买10点后的航班，乘11点的船离岛买15点后的航班，乘14：00的船离岛买18：00后的航班。</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 3}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">斗湖机场 - 仙本那</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 提前1天到达（16：30前）可免费送至斗湖或仙本那酒店。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 提前1天到达（16：30后到）可免费送至斗湖酒店。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 入住当天13：30 前抵达斗湖机场，可入住卡帕莱。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">④ 提前2天起到达不接机。</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 10：00AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 12：30PM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 16：30PM</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">卡帕莱度假村离岛船班</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 06：30AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 09：30AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 13：30PM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离岛第二天自行前往机场</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">温馨提示，爱的建议</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">当天上岛的客人请尽量预订最早航班到达斗湖。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离岛航班推荐：乘6：30的船离岛买10点半后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘9：30的船离岛买13：30后的航班，乘13：30点的船离岛买17：30后的航班。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘13：30点的船离岛买17：30后的航班。</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 5}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 12:30</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 16:30</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">邦邦岛度假村离岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 09:30</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 13:00</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">度假村接送时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">抵达：当天上岛，需购买15:00前到达斗湖的航班，否则无法当天上岛。</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离开：离岛当天离开斗湖，需预定13：30以后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">斗湖酒店：早上8:00在酒店大堂接，乘12:30船班上岛</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">仙本那酒店：早上11:15在酒店大堂接，乘12:30船班上岛</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘9：30点的船离岛买13：30点后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘13：30点的船离岛买17：30点后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">提前&离岛后一天均无航班接送</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 6}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">斗湖机场 - 仙本那</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 15点之前到斗湖机场的可以接机送上岛 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 提前一天15点前到斗湖机场可送到仙本那酒店（斗湖酒店需自行前往），第二天9:30在酒店大堂等接上岛。 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 其他时间到达，需自行前往酒店。 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 10：00AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 12：30PM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 16：30PM</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">马布岛度假村 — 机场</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 07：30AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 11：00AM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 14：00PM</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离岛第二天不送机</view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘6点的船离岛买10点后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘11点的船离岛买15点后的航班</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘13：30的船离岛买17：30后的航班</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 7}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间</view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 12:30</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 16:30 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">邦邦岛度假村离岛时间 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 06:30 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 09:30 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 13:30 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">度假村接送说明 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">当天上岛的客人按到达的时间接送至仙本那码头（超过14：30 后到达的航班当天不安排上岛，但是可以送往仙本那酒店） </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘6：30的船离岛买10：30后的航班 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘9：30的船离岛买13：30后的航班 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘13：30的船离岛买17：30后的航班 </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 8}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">仙本那码头上岛时间 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 10：00 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 12：00 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 16：30 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">15：15后到达斗湖的航班需第二天上岛；提前一天17：00前到达的航班可送至仙本那 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">中转酒店接送时间 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 住斗湖酒店的客人7：00AM在酒店大堂等待接送 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 住仙本那酒店的客人9：30AM在酒店大堂等待接送 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛船班 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">① 06：00 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">② 11：00 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">③ 13：30 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">离岛第二天不送机 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘6点的船离岛买10点后的航班 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘11点的船离岛买15点后的航班 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">乘13：30的船离岛买17：30后的航班 </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{template === 9}}">
+        <view class="weui-cells__title">度假村接送时间</view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">上岛船班 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">10:00AM </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛船班 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">7:00AM </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">离岛航班推荐 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">建议购买11：00后离开山打根的航班，当天上岛需8：30前到达山打根。 </view>
+            </view>
+          </view>
+        </view>
+        <view class="flightInfor-interval weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">接送说明 </view>
+          </view>
+          <view class="flightInfor-item-extra}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">08:30之前抵达山打根航班可当天送上兰卡央岛 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">08:30之后抵达无法当天上岛，需要提前一天到并自行前往山打根住宿，次日09:30从山打根酒店接上前往码头上岛 </view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">返程航班在上午11:00之前需提前一晚离岛，次日自行前往机场，如需离岛当天起飞，建议至少订中午12:00后山打根起飞的航班,如需参加西必洛半日游的，请订14点以后的航班。 </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
 
   </view>
 

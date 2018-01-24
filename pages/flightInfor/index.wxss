@@ -17,6 +17,11 @@ page {
   margin-bottom: 175rpx;
 }
 
+/** description **/
+.flightInfor .flightInfor-description .flightInfor-item-extra {
+  border-top: 1rpx solid #d9d9d9;
+}
+
 /** operate **/
 .flightInfor .flightInfor-operate {
   position: fixed;

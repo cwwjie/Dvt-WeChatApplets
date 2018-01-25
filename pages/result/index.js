@@ -8,7 +8,7 @@ Page({
     'error': 'waiting'
   },
 
-  copyError: function() {
+  copyError: function () {
     if (wx.setClipboardData) {
       wx.setClipboardData({
         data: 'data', // 错误信息放置在这里
@@ -29,11 +29,23 @@ Page({
     }
   },
 
+  returnToHomePage: function () {
+    if (wx.reLaunch) {
+      wx.reLaunch({
+        'url': './../home/index'
+      })
+    } else {
+      wx.navigateTo({
+        'url': './../home/index'
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -47,14 +59,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**

@@ -109,9 +109,7 @@ Page({
   
   saveConfirm: function () {
     if (this.data.buttonType === 'primary') {
-      wx.navigateTo({
-        url: './../detail/index'
-      })
+      wx.navigateBack();
     }
   }
 })

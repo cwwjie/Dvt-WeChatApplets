@@ -1,5 +1,7 @@
 Page({
   'data': {
+    'present': '', // '1' '2' '1,2' 
+
     'orderName': '半独立沙滩木屋',
     'orderSn': '2017082901',
     'payStatus': '已付款',
@@ -21,11 +23,15 @@ Page({
     'notPayAmount': 4000,
   },
 
-  jumpBack: function () {
-    wx.navigateBack();
-  },
-
   jumpToNext: function () {
-    
+    if (this.data.present) {
+      wx.navigateTo({
+        url: './../giftInfor/index'
+      })
+    } else {
+      wx.navigateTo({
+        url: './../reserverInfor/index'
+      })
+    }
   }
 })

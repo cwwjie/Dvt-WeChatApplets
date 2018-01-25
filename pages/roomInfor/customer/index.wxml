@@ -144,7 +144,7 @@
     </view>
   </view>
 
-  <view class="roomInfor-customer-operate">
+  <view class="bottom-customer-operate">
     <view class="WingBlank">
       <button class="weui-btn" type="{{buttonType}}" bindtap="saveConfirm">确认</button>
     </view>

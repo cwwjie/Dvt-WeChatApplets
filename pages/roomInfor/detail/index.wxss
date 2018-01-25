@@ -11,16 +11,3 @@ page {
 .roomInfor-detail .roomInfor-detail-customer-preview {
   margin-top: 35rpx;
 }
-
-/** operate **/
-.roomInfor-detail .roomInfor-detail-operate {
-  position: fixed;
-  bottom: 0px;
-  border-top: 1rpx solid #ddd;
-  background: #fff;
-  width: 100%;
-}
-
-.roomInfor-detail .roomInfor-detail-operate .WingBlank {
-  padding: 20rpx 35rpx;
-}

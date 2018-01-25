@@ -49,7 +49,7 @@
     </view>
   </view>
 
-  <view class="roomInfor-detail-operate">
+  <view class="bottom-detail-operate">
     <view class="WingBlank">
       <button class="weui-btn" type="{{buttonType}}" bindtap="saveConfirm">确认</button>
     </view>

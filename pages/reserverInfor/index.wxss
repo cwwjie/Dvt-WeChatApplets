@@ -20,7 +20,7 @@ page {
 }
 
 /** operate **/
-.reserverInfor .reserverInfor-operate {
+/* .reserverInfor .reserverInfor-operate {
   position: fixed;
   bottom: 0px;
   border-top: 1px solid #ddd;
@@ -36,4 +36,4 @@ page {
   display: inline-block;
   padding: 0px 5%;
   width: 40%;
-}
+} */

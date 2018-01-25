@@ -1,17 +1,20 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/specialNote/index",
-    "pages/flightInfor/index",
+    "pages/terms/index",
+    "pages/orderInfor/index",
+    "pages/giftInfor/index",
+    "pages/reserverInfor/index",
+
     "pages/roomInfor/customer/index",
     "pages/roomInfor/detail/index",
     "pages/roomInfor/index",
-    "pages/giftInfor/index",
-    "pages/reserverInfor/index",
-    "pages/orderInfor/index",
-    "pages/terms/index",
+
+    "pages/flightInfor/index",
+    "pages/specialNote/index",
     "pages/result/index"
   ],
+
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

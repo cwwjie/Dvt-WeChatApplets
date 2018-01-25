@@ -29,39 +29,38 @@
       </view>
     </view>
 
-    <view class="weui-cells__title">赠送保险</view>
-    <view class="giftInfor-interval weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">“保游全球”畅游海外旅行保障A计划</view>
+    <view wx:if="{{present === '1' || present === '1,2'}}">
+      <view class="weui-cells__title">赠送保险</view>
+      <view class="giftInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">“保游全球”畅游海外旅行保障A计划</view>
+        </view>
+      </view>
+  
+      <view class="weui-cells__title">保险期间</view>
+      <view class="giftInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">{{insurance}}</view>
+        </view>
       </view>
     </view>
 
-    <view class="weui-cells__title">保险期间</view>
-    <view class="giftInfor-interval weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">{{insurance}}</view>
-      </view>
-    </view>
-
-    <view class="weui-cells__title">接送</view>
-    <view class="giftInfor-interval weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">1 次往返亚庇机场 -- 市区酒店的接送,免费接机时间段为 6:05-21:55，超出时间需另付35元</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">{{transfersInfo}}</view>
+    <view wx:if="{{present === '2' || present === '1,2'}}">
+      <view class="weui-cells__title">接送</view>
+      <view class="giftInfor-interval weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">1 次往返亚庇机场 -- 市区酒店的接送,免费接机时间段为 6:05-21:55，超出时间需另付35元</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">{{transfersInfo}}</view>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="giftInfor-operate">
+  <view class="bottom-operate">
     <view class="WingBlank">
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
-      </view>
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
-      </view>
+      <button class="weui-btn" type="primary" bindtap="jumpToNext">填写联系人信息</button>
     </view>
   </view>
 </view>

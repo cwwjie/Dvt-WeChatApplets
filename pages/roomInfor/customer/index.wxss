@@ -11,18 +11,3 @@ page {
 .roomInfor-customer .roomInfor-customer-main {
   padding-bottom: 175rpx;
 }
-
-
-/** operate **/
-.roomInfor-customer .roomInfor-customer-operate {
-  position: fixed;
-  bottom: 0px;
-  border-top: 1rpx solid #ddd;
-  background: #fff;
-  width: 100%;
-  z-index: 2;
-}
-
-.roomInfor-customer .roomInfor-customer-operate .WingBlank {
-  padding: 20rpx 35rpx;
-}

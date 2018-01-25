@@ -13,10 +13,20 @@ Page({
   },
 
   jumpBack: function () {
-    wx.navigateBack();
+    wx.navigateTo({
+      'url': './../flightInfor/index'
+    })
   },
 
   jumpToNext: function () {
-    
-  }
+    if (wx.reLaunch) {
+      wx.reLaunch({
+        'url': './../result/index'
+      })
+    } else {
+      wx.navigateTo({
+        'url': './../result/index'
+      })
+    }
+  },
 })

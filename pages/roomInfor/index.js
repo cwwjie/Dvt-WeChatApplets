@@ -14,6 +14,8 @@ let iceRelation = {
 
 Page({
   'data': {
+    'template': '',
+
     'buttonType': 'default',
 
     'iceName': '',
@@ -114,11 +116,26 @@ Page({
     }, () => this.handleAllowNext());
   },
 
-  jumpBack: function () {
-    wx.navigateBack();
+  handleAllowNext: function () {
+    return request.success();
   },
 
   jumpToNext: function () {
-    
+    if (this.handleAllowNext().result === 1) {
+      wx.navigateTo({
+        'url': './../flightInfor/index'
+      })
+    } else {
+      if (wx.showToast) {
+        wx.showToast({
+          'title': '必须补充完成入住信息',
+          'icon': 'none'
+        })
+
+        setTimeout(function(){
+          wx.hideToast()
+        }, 2000)
+      }
+    }
   }
 })

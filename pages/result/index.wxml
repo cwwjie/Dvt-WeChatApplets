@@ -5,7 +5,7 @@
     </view>
     <view class="result-description">恭喜你, 提交成功</view>
     <view class="result-button">
-      <button class="weui-btn" type="primary">查看提交信息</button>
+      <button class="weui-btn" type="primary" bindtap="returnToHomePage">查看提交信息</button>
     </view>
   </view>
   <view wx:if="{{status === 'failure'}}" class="result-content result-failure">
@@ -16,7 +16,7 @@
     <view class="result-infor">原因: {{error}}</view>
     <view class="result-button">
       <button class="weui-btn result-copy-error" plain="true" bindtap="copyError">复制错误信息</button>
-      <button class="weui-btn" type="default" plain="true">返回</button>
+      <button class="weui-btn" type="default" plain="true" bindtap="returnToHomePage">返回</button>
     </view>
   </view>
   <view wx:if="{{status === 'waiting'}}" class="result-content result-failure">

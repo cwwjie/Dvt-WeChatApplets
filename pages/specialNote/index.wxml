@@ -559,14 +559,9 @@
 
   </view>
 
-  <view class="specialNote-operate">
+  <view class="bottom-operate">
     <view class="WingBlank">
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
-      </view>
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpToNext">提交</button>
-      </view>
+      <button class="weui-btn" type="primary" bindtap="jumpToNext">提交</button>
     </view>
   </view>
 </view>

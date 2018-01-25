@@ -16,9 +16,7 @@ Page({
 
   saveConfirm: function () {
     if (this.data.buttonType === 'primary') {
-      wx.navigateTo({
-        url: './../index'
-      })
+      wx.navigateBack();
     }
   }
 })

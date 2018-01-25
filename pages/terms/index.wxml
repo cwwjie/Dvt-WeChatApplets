@@ -17,7 +17,7 @@
       <view class="radio">
         <radio value="terms" checked="{{isRead}}" bindtap="agreeTerms"/> 同意条款
       </view>
-      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToOrderInfor">填写订单</button>
+      <button class="weui-btn" type="{{isRead ? 'primary' : 'default'}}" bindtap="jumpToOrderInfor">填写订单</button>
     </view>
   </view>
 </view>

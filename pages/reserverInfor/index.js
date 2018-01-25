@@ -3,6 +3,8 @@ import request from './../../utils/request';
 
 Page({
   'data': {
+    'present': '', // '1' '2' '1,2' 
+
     'buttonType': 'default',
 
     'signName': '',
@@ -32,6 +34,32 @@ Page({
     setTimeout(function(){
       wx.hideToast();
     }, 2000);
+  },
+
+  chackAll: function () {
+    let data = this.data;
+
+    let verifySignName = this.verifySignName(this.data.signName);
+    if (verifySignName.result !== 1) {
+      data.signNameError = verifySignName.message;
+    }
+
+    let verifyPinyinName = this.verifyPinyinName(this.data.pinyinName);
+    if (verifyPinyinName.result !== 1) {
+      data.pinyinNameError = verifyPinyinName.message;
+    }
+
+    let verifyMobile = this.verifyMobile(this.data.mobile);
+    if (verifyMobile.result !== 1) {
+      data.mobileError = verifyMobile.message;
+    }
+
+    let verifyEmail = this.verifyEmail(this.data.email);
+    if (verifyEmail.result !== 1) {
+      data.emailError = verifyEmail.message;
+    }
+
+    this.setData(data);
   },
 
   handleAllowNext: function () {
@@ -134,11 +162,13 @@ Page({
     }, () => this.handleAllowNext());
   },
 
-  jumpBack: function () {
-    wx.navigateBack();
-  },
-
   jumpToNext: function () {
-    
+    if (this.data.buttonType === 'primary') {
+      wx.navigateTo({
+        'url': './../roomInfor/index'
+      })
+    } else {
+      this.chackAll();
+    }
   }
 })

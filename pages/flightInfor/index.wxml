@@ -281,7 +281,7 @@
           </view>
           <view class="flightInfor-item-extra}}">
             <view class="weui-cell">
-              <view class="weui-cell__bd">① 07：30AM</view>
+              <view class="weui-cell__bd">① 07：00AM</view>
             </view>
             <view class="weui-cell">
               <view class="weui-cell__bd">② 11：00AM</view>
@@ -488,7 +488,7 @@
           </view>
           <view class="flightInfor-item-extra}}">
             <view class="weui-cell">
-              <view class="weui-cell__bd">① 07：30AM</view>
+              <view class="weui-cell__bd">① 07：00AM</view>
             </view>
             <view class="weui-cell">
               <view class="weui-cell__bd">② 11：00AM</view>
@@ -703,14 +703,9 @@
 
   </view>
 
-  <view class="flightInfor-operate">
+  <view class="bottom-operate">
     <view class="WingBlank">
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
-      </view>
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
-      </view>
+      <button class="weui-btn" type="primary" bindtap="jumpToNext">下一步</button>
     </view>
   </view>
 </view>

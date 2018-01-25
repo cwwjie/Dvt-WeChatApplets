@@ -78,14 +78,9 @@
 
   </view>
 
-  <view class="reserverInfor-operate">
+  <view class="bottom-operate">
     <view class="WingBlank">
-      <view class="btn-content">
-        <button class="weui-btn" type="primary" bindtap="jumpBack">上一步</button>
-      </view>
-      <view class="btn-content">
-        <button class="weui-btn"  type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
-      </view>
+      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
     </view>
   </view>
 </view>

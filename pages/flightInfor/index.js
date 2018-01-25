@@ -37,11 +37,9 @@ Page({
     this.setData(temObj);
   },
 
-  jumpBack: function () {
-    wx.navigateBack();
-  },
-
   jumpToNext: function () {
-    
+    wx.navigateTo({
+      'url': './../specialNote/index'
+    })
   }
 })

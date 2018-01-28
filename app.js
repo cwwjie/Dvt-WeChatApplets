@@ -1,3 +1,5 @@
+import convertDate from './utils/convertDate';
+
 //app.js
 App({
   // 远程服务器的数据
@@ -102,6 +104,8 @@ App({
   'state': false && { // false 表示未初始化
     'orderSn': null, // 辨识 id
 
+    'template': null, // 模板
+
     'isFirstSubmit': false, // 是否 第一次提交
 
     // terms
@@ -147,8 +151,8 @@ App({
 
     // flightInfor 航班信息
     'outboundNum': null, // 国际航班号（入境）
-    'landDate': null,
-    'landTime': null,
+    'landDate': null, // 2018-01-02
+    'landTime': null, // 03:00
 
     'inHarbourNum': null, // 到港航班号
     'hLandDate': null,
@@ -181,6 +185,8 @@ App({
     let state = {
       'orderSn': val.orderSn,
 
+      'template': val.template,
+
       'isFirstSubmit': false, // 是否 第一次提交
     
       // terms
@@ -196,56 +202,57 @@ App({
     
       // roomInfor 房间信息
       'isRoomInforcomplete': false, // 是否 完成 房间信息
+
+      'iceName': val.roomInfoList.length ? val.roomInfoList[0].iceName : null,
+      'iceRelation': val.roomInfoList.length ? val.roomInfoList[0].iceRelation : null,
+      'iceMobile': val.roomInfoList.length ? val.roomInfoList[0].iceMobile : null,
+      'iceEmail': val.roomInfoList.length ? val.roomInfoList[0].iceEmail : null,
     
       'selectRoomNum': 0,
       'selectCustomerNum': 0,
     
-      'roomInfoList': [{
-        'bedType': null,
-        'customerInfoList': [{
-          'passportNo': null,
-          'nationality': null,
-          'chineseName': null,
-          'pinyinName': null,
-          'birthday': null,
-          'gender': null, // 1男 2女
-          'email': null,
-          'mobile': null,
-          'isDive': null,
-          'divingCount': null,
-          'divingNo': null,
-          'divingRank': null,
-          'lastDiveTime': null,
-          'anamnesis': null,
-        }]
-      }],
-    
+      'roomInfoList': val.roomInfoList.map(room => ({
+        'bedType': room.bedType ? room.bedType : null,
+        'customerInfoList': room.customerInfoList ? room.customerInfoList.map(customer => ({
+          'passportNo': customer.passportNo,
+          'nationality': customer.nationality,
+          'chineseName': customer.chineseName,
+          'pinyinName': customer.pinyinName,
+          'birthday': customer.birthday,
+          'gender': customer.gender, // 1男 2女
+          'email': customer.email,
+          'mobile': customer.mobile,
+          'isDive': customer.isDive,
+          'divingCount': customer.divingCount,
+          'divingNo': customer.divingNo,
+          'divingRank': customer.divingRank,
+          'lastDiveTime': customer.lastDiveTime,
+          'anamnesis': customer.anamnesis,
+        })) : null,
+      })),
+      
       // flightInfor 航班信息
-      'outboundNum': null, // 国际航班号（入境）
-      'landDate': null,
-      'landTime': null,
+      'outboundNum': val.outboundNum ? val.outboundNum : null, // 国际航班号（入境）
+      'landDate': val.landDate ? convertDate.timestampToFormat(val.landDate) : null,
+      'landTime': val.landTime ? convertDate.timestampToHHmm(val.landTime) : null,
     
-      'inHarbourNum': null, // 到港航班号
-      'hLandDate': null,
-      'hLandTime': null,
+      'inHarbourNum': val.inHarbourNum ? val.inHarbourNum : null, // 到港航班号
+      'hLandDate': val.hLandDate ? convertDate.timestampToFormat(val.hLandDate) : null,
+      'hLandTime': val.hLandTime ? convertDate.timestampToHHmm(val.hLandTime) : null,
       
-      'outHarbourNum': null, // 离港航班号
-      'hTakeoffDate': null,
-      'hTakeoffTime': null,
+      'outHarbourNum': val.outHarbourNum ? val.outHarbourNum : null, // 离港航班号
+      'hTakeoffDate': val.hTakeoffDate ? convertDate.timestampToFormat(val.hTakeoffDate) : null,
+      'hTakeoffTime': val.hTakeoffTime ? convertDate.timestampToHHmm(val.hTakeoffTime) : null,
       
-      'inboundNum': null, // 国际航班号（出境）
-      'takeoffDate': null,
-      'takeoffTime': null,
+      'inboundNum': val.inboundNum ? val.inboundNum : null, // 国际航班号（出境）
+      'takeoffDate': val.takeoffDate ? convertDate.timestampToFormat(val.takeoffDate) : null,
+      'takeoffTime': val.takeoffTime ? convertDate.timestampToHHmm(val.takeoffTime) : null,
     };
 
-    state.iceName = null;
-    state.iceRelation = null;
-    state.iceMobile = null;
-    state.iceEmail = null;
-
-    return {}
+    return state;
   },
 
+  // 这边逻辑暂且可不需过于认真
   init: function (val) {
     // 初始化 远程服务器数据
     this.databaseData = val;

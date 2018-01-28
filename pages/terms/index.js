@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   'data': {
     'isRead': false
@@ -7,6 +9,14 @@ Page({
     this.setData({
       'isRead': true
     });
+  },
+
+  onLoad: function () {
+    this.setData({ 'isRead': app.state.isReadTerms });
+  },
+
+  onHide: function () {
+    app.state.isReadTerms = this.data.isRead;
   },
 
   jumpToOrderInfor: function () {

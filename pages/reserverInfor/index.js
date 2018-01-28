@@ -1,6 +1,8 @@
 import ConvertPinyin from './../../utils/ChineseHelper';
 import request from './../../utils/request';
 
+const app = getApp();
+
 Page({
   'data': {
     'present': '', // '1' '2' '1,2' 
@@ -23,6 +25,35 @@ Page({
     'emailError': '',
   },
 
+  onLoad: function () {
+    this.setData({
+    'buttonType': app.state.isReserverInforcomplete ? 'primary' : 'default',
+
+    'signName': app.state.signName, 
+    'pinyinName': app.state.pinyinName, 
+    'payAccount': app.state.payAccount, 
+    'mobile': app.state.mobile, 
+    'email': app.state.email 
+    });
+  },
+
+  onHide: function () {
+    this.saveToApp();
+  },
+
+  onUnload: function () {
+    this.saveToApp();
+  },
+
+  saveToApp: function () {
+    app.state.isReserverInforcomplete = this.chackAll();
+    app.state.signName = this.data.signName;
+    app.state.pinyinName = this.data.pinyinName;
+    app.state.payAccount = this.data.payAccount;
+    app.state.mobile = this.data.mobile;
+    app.state.email = this.data.email;
+  },
+
   showError: function (event) {
     const _this = this;
 
@@ -37,29 +68,35 @@ Page({
   },
 
   chackAll: function () {
+    let isComplete = true;
     let data = this.data;
 
     let verifySignName = this.verifySignName(this.data.signName);
     if (verifySignName.result !== 1) {
+      isComplete = false;
       data.signNameError = verifySignName.message;
     }
 
     let verifyPinyinName = this.verifyPinyinName(this.data.pinyinName);
     if (verifyPinyinName.result !== 1) {
+      isComplete = false;
       data.pinyinNameError = verifyPinyinName.message;
     }
 
     let verifyMobile = this.verifyMobile(this.data.mobile);
     if (verifyMobile.result !== 1) {
+      isComplete = false;
       data.mobileError = verifyMobile.message;
     }
 
     let verifyEmail = this.verifyEmail(this.data.email);
     if (verifyEmail.result !== 1) {
+      isComplete = false;
       data.emailError = verifyEmail.message;
     }
 
     this.setData(data);
+    return isComplete;
   },
 
   handleAllowNext: function () {

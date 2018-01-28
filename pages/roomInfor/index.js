@@ -1,14 +1,16 @@
 import request from './../../utils/request';
 
+const app = getApp();
+
 let iceRelation = {
   'data': ['兄弟姐妹', '父母', '夫妻', '朋友', '其他'],
 
   toIndex: function (val) {
-    return this.data.indexOf(val)
+    return this.data.indexOf(val);
   },
 
   toValue: function (val) {
-    return this.data[val]
+    return this.data[val];
   }
 }
 
@@ -17,6 +19,12 @@ Page({
     'template': '',
 
     'buttonType': 'default',
+
+    'roomInfoList': [{
+      'isComplete': false,
+      'bedType': null,
+      'customerCount': 0,
+    }],
 
     'iceName': '',
     'iceNameError': '',
@@ -29,6 +37,19 @@ Page({
 
     'iceEmail': '',
     'iceEmailError': '',
+  },
+
+  onLoad: function () {
+    this.setData({
+      'template': app.state.template,
+
+      'buttonType': app.state.isRoomInforcomplete ? 'primary' : 'default',
+
+      'iceName': app.state.iceName,
+      'iceRelation': app.state.iceRelation,
+      'iceMobile': app.state.iceMobile,
+      'iceEmail': app.state.iceEmail
+    });
   },
 
   handleAllowNext: function () {

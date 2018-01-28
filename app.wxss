@@ -12,6 +12,7 @@
   border-top: 1px solid #ddd;
   background: #fff;
   width: 100%;
+  z-index: 2;
 }
 
 .bottom-operate .WingBlank {

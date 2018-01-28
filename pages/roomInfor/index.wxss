@@ -64,7 +64,7 @@ page {
   color: #353535;
 }
 
-.roomInfor .room-item-header .isComplete {
+.roomInfor .room-item-header .NotComplete {
   color: #F56C6C;
 }
 

@@ -1,13 +1,85 @@
+const app = getApp();
+
 Page({
   'data': {
     'buttonType': 'default',
 
+    'customerRestNum': null,
+
     'bedTypeList': ['单床', '大床', '双床'],
-    'bedType': 0
+    'bedType': 0,
+    'customerInfoList': [{
+      'chineseName': 'chineseName',
+      'nationality': 'nationality',
+      'birthday': 'birthday',
+      'mobile': 'mobile',
+    }],
+  },
+
+  saveToApp: function () {
+    const selectRoomNum = app.state.selectRoomNum;
+    app.state.roomInfoList[selectRoomNum].bedType = bedType.toValue(this.data.bedType);
+  },
+
+  onHide: function () {
+    this.saveToApp();
+  },
+
+  onUnload: function () {
+    this.saveToApp();
+  },
+
+  addCustomer: function () {
+    if (this.data.customerRestNum) {
+      app.state.selectRoomNum = this.data.customerInfoList.length;
+      wx.navigateTo({ 'url': './../customer/index' });
+    }
   },
 
   onLoad: function (options) {
-    this.setData({ 'bedTypeList': bedType.init().map(val => val.label) })
+    const selectRoomNum = app.state.selectRoomNum;
+    const customerInfoList = app.state.roomInfoList[selectRoomNum].customerInfoList;
+
+    this.setData({
+      'buttonType': customerInfoList.length > 1 ? 'primary' : 'default',
+
+      'bedTypeList': bedType.init(app.state.template).map(val => val.label),
+
+      'customerRestNum': this.countCustomerRest(),
+
+      'bedType': bedType.toIndex(app.state.roomInfoList[selectRoomNum].bedType),
+
+      'customerInfoList': customerInfoList.map(Infor => ({
+        'nationality': Infor.nationality,
+        'chineseName': Infor.chineseName,
+        'birthday': Infor.birthday,
+        'mobile': Infor.mobile,
+      })),
+    });
+  },
+
+  countCustomerRest: function () {
+    let customerCount = 0;
+    let roomInfoList = app.state.roomInfoList;
+    let peopleNum = app.databaseData.peopleNum;
+    let selectRoomNum = app.state.selectRoomNum;
+    let thisRoomCustomer = app.state.roomInfoList[selectRoomNum].customerInfoList.length;
+
+    roomInfoList.map(room => customerCount += room.customerInfoList.length);
+    let otherRoomCustomer = peopleNum - customerCount;
+
+    if (roomInfoList.length > 1) {
+      if (
+        thisRoomCustomer >= roomInfoList.length - 1 ||
+        otherRoomCustomer >= roomInfoList.length - 1
+      ) {
+        return peopleNum - customerCount - thisRoomCustomer;
+      } else {
+        return peopleNum - customerCount + thisRoomCustomer - roomInfoList.length + 1;
+      }
+    } else {
+      return peopleNum - customerCount;
+    }
   },
 
   bedTypeChange: function (event) {
@@ -226,7 +298,7 @@ let bedType = {
   },
 
   toIndex: function (val) {
-    return this.data.map(val => val.label).indexOf(val)
+    return this.data.map(val => val.value).indexOf(val)
   },
 
   toValue: function (val) {

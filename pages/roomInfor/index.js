@@ -3,7 +3,7 @@ import request from './../../utils/request';
 const app = getApp();
 
 let iceRelation = {
-  'data': ['兄弟姐妹', '父母', '夫妻', '朋友', '其他'],
+  'data': ['兄弟姐妹', '父母', '夫妻', '朋友'],
 
   toIndex: function (val) {
     return this.data.indexOf(val);
@@ -20,6 +20,8 @@ Page({
 
     'buttonType': 'default',
 
+    'customerRest': null,
+
     'roomInfoList': [{
       'isComplete': false,
       'bedType': null,
@@ -30,7 +32,8 @@ Page({
     'iceNameError': '',
 
     'iceRelationArray': iceRelation.data,
-    'iceRelation': iceRelation.toIndex('其他'),
+    'iceRelation': null,
+    'iceRelationError': '',
 
     'iceMobile': '',
     'iceMobileError': '',
@@ -39,28 +42,78 @@ Page({
     'iceEmailError': '',
   },
 
+  saveToApp: function () {
+    if (this.data.template === 3) {
+      app.state.iceName = this.verifyIceName(this.data.iceName).result === 1 ? this.data.iceName : null;
+      app.state.iceRelation = this.data.iceRelation !== null && this.data.iceRelation !== '' ? iceRelation.toValue(this.data.iceRelation) : null;
+      app.state.iceMobile = this.verifyIceMobile(this.data.iceMobile).result === 1 ? this.data.iceMobile : null;
+    }
+  },
+
+  onHide: function () {
+    this.saveToApp();
+  },
+
+  onUnload: function () {
+    this.saveToApp();
+  },
+
   onLoad: function () {
     this.setData({
       'template': app.state.template,
 
       'buttonType': app.state.isRoomInforcomplete ? 'primary' : 'default',
 
+      'customerRest': this.countCustomerRest(),
+
+      'roomInfoList': app.state.roomInfoList.map(room => ({
+        'isComplete': room.bedType !== null && room.customerInfoList.length > 0 ? true : false,
+        'bedType': room.bedType,
+        'customerCount': room.customerInfoList.length,
+      })),
+
       'iceName': app.state.iceName,
-      'iceRelation': app.state.iceRelation,
+      'iceRelation': app.state.iceRelation !== null && app.state.iceRelation !== '' ? iceRelation.toIndex(app.state.iceRelation) : null,
+      'iceRelationError': app.state.iceRelation === null || app.state.iceRelation === '' ? '请选择紧急联系人关系' : '',
+
       'iceMobile': app.state.iceMobile,
-      'iceEmail': app.state.iceEmail
+      // 'iceEmail': app.state.iceEmail // 邮箱暂时不用管
     });
   },
 
+  countCustomerRest: function () {
+    let customerCount = 0;
+    let roomInfoList = app.state.roomInfoList;
+    let peopleNum = app.databaseData.peopleNum;
+
+    roomInfoList.map(room => customerCount += room.customerInfoList.length);
+
+    if (peopleNum - customerCount > 0) {
+      let customerRestNum = peopleNum - customerCount;
+      return roomInfoList.length > 0 ? `还可入住 0 - ${customerRestNum} 人` : `还可入住 ${customerRestNum} 人`;
+    } else {
+      return '已住满'
+    }
+  },
+
+  handleAllowIce: function () {
+    if (this.data.template === 3) {
+      if (
+        this.verifyIceName(this.data.iceName).result === 1 &&
+        this.verifyIceMobile(this.data.iceMobile).result === 1  &&
+        this.data.iceRelation !== null &&
+        this.data.iceRelation !== ''
+      ) {
+        return request.success();
+      } else {
+        return request.error('紧急联系人未完成!');
+      }
+    } else {
+      return request.success();
+    }
+  },
+
   handleAllowNext: function () {
-    // if (
-    //   this.verifyMobile(this.data.mobile).result === 1 &&
-    //   this.verifyEmail(this.data.email).result === 1
-    // ) {
-    //   this.setData({ 'buttonType': 'primary' });
-    // } else {
-    //   this.setData({ 'buttonType': 'default' });
-    // }
   },
 
   showError: function (event) {
@@ -76,6 +129,7 @@ Page({
     }, 2000);
   },
 
+  // 验证姓名
   verifyIceName: function (iceName) {
     if (iceName === '') {
       return request.error('中文名为必填');
@@ -95,10 +149,15 @@ Page({
     }, () => this.handleAllowNext());
   },
 
+  // 关系
   iceRelationChange: function (event) {
-    this.setData({'iceRelation': event.detail.value});
+    this.setData({
+      'iceRelation': event.detail.value,
+      'iceRelationError': ''
+    });
   },
 
+  // 验证手机
   verifyIceMobile: function (mobile) {
     if (mobile === '') {
       return request.error('电话为必填');
@@ -118,6 +177,7 @@ Page({
     }, () => this.handleAllowNext());
   },
 
+  // 验证邮箱
   verifyIceEmail: function (email) {
     if (email === '') {
       return request.error('邮箱为必填');
@@ -137,10 +197,6 @@ Page({
     }, () => this.handleAllowNext());
   },
 
-  handleAllowNext: function () {
-    return request.success();
-  },
-
   jumpToNext: function () {
     if (this.handleAllowNext().result === 1) {
       wx.navigateTo({
@@ -158,5 +214,13 @@ Page({
         }, 2000)
       }
     }
+  },
+
+  jumpToDetail: function (event) {
+    app.state.selectRoomNum = event.currentTarget.id;
+
+    wx.navigateTo({
+      'url': './detail/index'
+    })
   }
 })

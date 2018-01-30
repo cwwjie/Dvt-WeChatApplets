@@ -43,8 +43,8 @@
           </view>
       </view>
       <view class="weui-form-preview__ft">
-        <view class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">删除</view>
-        <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">编辑</view>
+        <view id="{{index}}" bindtap="deleteCustomer" class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">删除</view>
+        <view id="{{index}}" bindtap="editCustomer" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">编辑</view>
       </view>
     </view>
   </view>

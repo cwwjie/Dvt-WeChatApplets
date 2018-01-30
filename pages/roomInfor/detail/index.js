@@ -31,12 +31,34 @@ Page({
 
   addCustomer: function () {
     if (this.data.customerRestNum) {
-      app.state.selectRoomNum = this.data.customerInfoList.length;
+      app.state.selectCustomerNum = this.data.customerInfoList.length;
       wx.navigateTo({ 'url': './../customer/index' });
     }
   },
 
-  onLoad: function (options) {
+  deleteCustomer: function (event) {
+    const _this = this;
+    const selectRoomNum = app.state.selectRoomNum;
+    const selectCustomerNum = parseInt(event.currentTarget.id);
+
+    wx.showModal({
+      title: '删除',
+      content: '你确认删除客人信息吗?',
+      success: function(res) {
+        if (res.confirm) {
+          app.state.roomInfoList[selectRoomNum].customerInfoList = app.state.roomInfoList[selectRoomNum].customerInfoList.slice(selectCustomerNum + 1);
+          _this.loadDetail();
+        }
+      }
+    })
+  },
+
+  editCustomer: function (event) {
+    app.state.selectCustomerNum = parseInt(event.currentTarget.id);
+    wx.navigateTo({ 'url': './../customer/index' });
+  },
+
+  loadDetail: function () {
     const selectRoomNum = app.state.selectRoomNum;
     const customerInfoList = app.state.roomInfoList[selectRoomNum].customerInfoList;
 
@@ -56,6 +78,10 @@ Page({
         'mobile': Infor.mobile,
       })),
     });
+  },
+
+  onLoad: function (options) {
+    this.loadDetail();
   },
 
   countCustomerRest: function () {

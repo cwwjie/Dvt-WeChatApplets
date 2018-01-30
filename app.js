@@ -138,7 +138,7 @@ App({
         'pinyinName': null,
         'birthday': null,
         'gender': null, // 1男 2女
-        'email': null,
+        // 'email': null,
         'mobile': null,
         'isDive': null,
         'divingCount': null,

@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/login/index",
+
     "pages/home/index",
     "pages/terms/index",
     "pages/orderInfor/index",

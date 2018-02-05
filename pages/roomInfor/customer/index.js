@@ -12,30 +12,31 @@ Page({
 
     'nationalityList': ['正在加载'],
     'nationality': 0,
-    
+
     'chineseName': '',
     'chineseNameError': '',
-    
+
     'pinyinName': '',
     'pinyinNameError': '',
-    
+
     'genderList': ['男', '女'],
     'gender': 0,
-    
+
     'birthday': '2018-01-01',
-    
+
     'mobile': '',
     'mobileError': '',
-    
+
     // 'email': '',
     // 'emailError': '',
-    
+
     'isDive': false, // 是否深潜？ 'N' 'Y' 最终上传的数据
-    
+
     'divingRankList': ['无', 'OW', 'AOW及以上'],
     'divingRank': 0,
 
     'divingCount': '', // 潜水次数
+    'divingCountError': '',
 
     'lastDiveTime': '无', // 上次潜水时间
 
@@ -90,6 +91,32 @@ Page({
 
   onUnload: function () {
     this.saveToApp();
+  },
+
+  onLoad: function () {
+    if (this.checkIsAdd() === false) {
+      const selectRoomNum = app.state.selectRoomNum;
+      const selectCustomerNum = app.state.selectCustomerNum;
+      const selectCustomer = app.state.roomInfoList[selectRoomNum].customerInfoList[selectCustomerNum];
+
+      this.setData({
+        'buttonType': 'primary',
+        'passportNo': selectCustomer.passportNo,
+        // 'nationality': selectCustomer.nationality,
+        'chineseName': selectCustomer.chineseName,
+        'pinyinName': selectCustomer.pinyinName,
+        'gender': selectCustomer.gender - 1,
+        'birthday': selectCustomer.birthday,
+        'mobile': selectCustomer.mobile,
+        'email': selectCustomer.email,
+        'isDive': selectCustomer.isDive === 'Y' ? true : false,
+        'divingRank': this.data.divingRankList.indexOf(selectCustomer.divingRank),
+        'divingCount': selectCustomer.divingCount,
+        'lastDiveTime': selectCustomer.lastDiveTime ? convertDate.timestampToFormat(selectCustomer.lastDiveTime) : '无',
+        'divingNo': selectCustomer.divingNo,
+        'anamnesis': selectCustomer.anamnesis
+      });
+    }
   },
 
   showError: function (event) {
@@ -181,7 +208,7 @@ Page({
   verifyMobile: function (mobile) {
     if (mobile === '') {
       return request.error('手机为必填');
-    } else if ( /^[0-9]*$/.test(mobile) === false ) {
+    } else if ( /^1[34578]\d{9}$/.test(mobile) === false ) {
       return request.error('请输入的手机格式必须为纯数字');
     } else {
       return request.success();
@@ -209,8 +236,25 @@ Page({
     this.setData({'divingRank': event.detail.value});
   },
 
+  verifyDivingCount: function (divingCount) {
+    if (divingCount === '' || divingCount === null) {
+      return request.success();
+    } else {
+      let myDivingCount = parseInt(divingCount);
+      if (myDivingCount > 100) {
+        return request.error('潜水次数不能大于100次以上');
+      }
+      return request.success();
+    }
+  },
+
   handleDivingCount: function (event) {
-    this.setData({'divingCount': event.detail.value});
+    let verify = this.verifyDivingCount(event.detail.value);
+
+    this.setData({
+      'divingCount': event.detail.value,
+      'divingCountError': verify.result === 1 ? '' : verify.message
+    });
   },
 
   lastDiveTimeChange: function (event) {
@@ -220,7 +264,7 @@ Page({
   handleDivingNo: function (event) {
     this.setData({'divingNo': event.detail.value});
   },
-  
+
   saveConfirm: function () {
     if (this.data.buttonType === 'primary') {
       wx.navigateBack();

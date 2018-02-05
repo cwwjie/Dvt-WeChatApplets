@@ -102,12 +102,15 @@
         </view>
       </view>
 
-      <view wx:if="{{isDive}}" class="weui-cell weui-cell_input">
+      <view wx:if="{{isDive}}" class="{{divingCountError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
         <view class="weui-cell__hd">
           <view class="weui-label">潜水次数</view>
         </view>
         <view class="weui-cell__bd">
           <input class="weui-input" value="{{divingCount}}" bindinput="handleDivingCount" placeholder="请输入潜水次数"/>
+        </view>
+        <view id="divingCountError" class="weui-cell__ft" wx:if="{{divingCountError !== ''}}" bindtap="showError">
+          <icon type="warn" size="23" color="#E64340"></icon>
         </view>
       </view>
 

@@ -1,5 +1,5 @@
-import ConvertPinyin from './../../utils/ChineseHelper';
-import request from './../../utils/request';
+import ConvertPinyin from './../../../utils/ChineseHelper';
+import request from './../../../utils/request';
 
 const app = getApp();
 

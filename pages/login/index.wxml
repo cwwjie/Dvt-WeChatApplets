@@ -1,5 +1,33 @@
 <view class="login">
-  <view class="login">
-    
+  <view class="WingBlank">
+    <view class="User-input">
+      <input 
+        type="text"
+        placeholder="账号" 
+        bindinput="handleAccount"
+        value="{{account}}"
+      />
+    </view>
+    <view class="User-input-error">{{accountError}}</view>
+    <view class="User-input">
+      <input 
+        type="number"
+        placeholder="密码" 
+        value="{{password}}"
+        bindinput="handlePassword"
+        password="{{!isPasswordShow}}"
+      />
+      <image 
+        bindtap="switchPasswordShow"
+        src="{{isPasswordShow ? './../../assets/eyehover.png' : './../../assets/eye.png'}}"
+      />
+    </view>
+    <view class="User-input-error">{{passwordError}}</view>
+    <label class="User-automatiSave">
+      <checkbox value="{{automatiSave}}" checked="{{automatiSave}}"/>自动保存密码
+    </label>
+    <view class="User-submit">
+      <button class="weui-btn" type="{{buttonType}}" bindtap="login">登录</button>
+    </view>
   </view>
 </view>

@@ -1,6 +1,6 @@
-import request from './../../../utils/request';
-import convertDate from './../../../utils/convertDate';
-import ConvertPinyin from './../../../utils/ChineseHelper';
+import request from './../../../../utils/request';
+import convertDate from './../../../../utils/convertDate';
+import ConvertPinyin from './../../../../utils/ChineseHelper';
 
 const app = getApp();
 

@@ -2,14 +2,60 @@ import convertDate from './utils/convertDate';
 
 //app.js
 App({
-  // 远程服务器的数据
-  'databaseData': JSON.parse(
-    // 此处是假数据的模拟
-    '{"infoId":131,"isRead":"Y","readTime":null,"template":3,"orderSn":"123AC","orderSrc":"TB","orderName":"水上屋","orderDesc":"","roomNum":1,"adultNum":2,"childNum":0,"peopleNum":2,"checkIn":1517328000000,"checkOut":1517414400000,"productAmount":1112,"orderAmount":612,"discount":500,"payAmount":612,"notPayAmount":0,"calMethod":"11","present":"1,2","signName":"阿斯顿","payAccount":"","mobile":"18503025768","email":"gewurong@divingtime.asia","outboundNum":"","landTime":null,"landDate":null,"inboundNum":"","takeoffTime":null,"takeoffDate":null,"inHarbourNum":"","hLandTime":1520000,"hLandDate":1514563200000,"outHarbourNum":"","hTakeoffTime":12033000,"hTakeoffDate":1514822400000,"flightNote":"","insuranceBegin":1518710400000,"insuranceEnd":1518796800000,"payStatus":1,"transfersInfo":"十多个是否","reservationCode":"","pinyinName":"ASiDun","resortShuttle":null,"remark":null,"kidsAge":"","roomInfoList":[{"roomId":134,"iceName":"曾杰","iceRelation":"兄弟姐妹","iceMobile":"15976713287","iceEmail":"","bedType":"单床","infoId":131,"customerInfoList":[{"customerId":170,"passportNo":"123123","nationality":"CHINA","chineseName":"曾杰1111","pinyinName":"ZengJie1111","gender":2,"birthday":"1981-01-01","mobile":"15976713287","email":"2498537734@qq.com","isDive":"Y","divingRank":2,"divingNo":"sfs","divingCount":12,"lastDiveTime":1509379200000,"anamnesis":null,"roomId":134,"age":37,"isKid":"N"},{"customerId":175,"passportNo":"123","nationality":"TAIWAN CHINA","chineseName":"控件","pinyinName":"KongJian","gender":1,"birthday":"1972-12-13","mobile":"12312","email":"","isDive":"N","divingRank":null,"divingNo":"","divingCount":null,"lastDiveTime":null,"anamnesis":null,"roomId":134,"age":46,"isKid":"N"}]}],"attachmentList":[{"attachId":21,"attachType":"PT2","attachThumb":"/source/image/attach/thum/thum_b0e294da-dfd0-4405-b4e7-6933f5da39b6.jpg","attachPath":"/source/image/attach/b0e294da-dfd0-4405-b4e7-6933f5da39b6.jpg","infoId":131},{"attachId":22,"attachType":"PT3","attachThumb":"/source/image/attach/thum/thum_263e39ff-e5ae-4d3a-bbfb-23bb7d68ff4c.jpg","attachPath":"/source/image/attach/263e39ff-e5ae-4d3a-bbfb-23bb7d68ff4c.jpg","infoId":131},{"attachId":23,"attachType":"PT4","attachThumb":"/source/image/attach/thum/thum_9499dcff-d542-4f4e-8a3e-c87b5b4270a5.jpg","attachPath":"/source/image/attach/9499dcff-d542-4f4e-8a3e-c87b5b4270a5.jpg","infoId":131},{"attachId":24,"attachType":"MC","attachThumb":"/source/image/attach/thum/thum_12b166f4-5bd8-4e09-a0b0-d11ddff77124.jpg","attachPath":"/source/image/attach/12b166f4-5bd8-4e09-a0b0-d11ddff77124.jpg","infoId":131},{"attachId":26,"attachType":"MC","attachThumb":"/source/image/attach/thum/thum_25b7dcb0-ff00-46c0-ac3e-0e427d1b0e89.png","attachPath":"/source/image/attach/25b7dcb0-ff00-46c0-ac3e-0e427d1b0e89.png","infoId":131}]}'
-  ),
+  // 淘宝选择的数据
+  'taobaoItem': {
+    //   'adultNum': 2,
+    //   'belongId': 33,
+    //   'calMethod': "123412",
+    //   'checkIn': 1514649600000,
+    //   'checkOut': 1514736000000,
+    //   'childNum': 0,
+    //   'confirmStatus': null,
+    //   'createBy': 33,
+    //   'createTime': 1512926229000,
+    //   'customCode': "AAADD",
+    //   'discount': 100,
+    //   'email': "",
+    //   'infoId': null,
+    //   'insuranceBegin': null,
+    //   'insuranceEnd': null,
+    //   'isBX': "N",
+    //   'isComplete': "N",
+    //   'isConfirmed': "Y",
+    //   'isLocked': "Y",
+    //   'isValid': "Y",
+    //   'kidsAge': "",
+    //   'linkId': 192,
+    //   'mobile': "",
+    //   'notPayAmount': 9800,
+    //   'operationStatus': 1,
+    //   'orderAmount': 9900,
+    //   'orderDesc': "123123",
+    //   'orderName': "园景房",
+    //   'orderSn': "AAADD",
+    //   'orderSrc': "TB",
+    //   'payAmount': 100,
+    //   'payStatus': 2,
+    //   'peopleNum': 2,
+    //   'pinyinName': "LianJieShu",
+    //   'present': "",
+    //   'productAmount': 10000,
+    //   'remark': null,
+    //   'reservationCode': "15544554",
+    //   'roomNum': 1,
+    //   'serialNumber': null,
+    //   'signName': "连接数",
+    //   'submitTime': null,
+    //   'template': 1,
+    //   'transfersInfo': "",
+    //   'uniqueKey': "a98afa21-3808-43d4-b2e3-522c8e4b388f",
+    //   'updateBy': 29,
+    //   'updateTime': 1515615162000,
+    //   'userId': 106,
+  },
 
-  // 提交的数据
-  'submitData': {
+  // 远程服务器的数据
+  'getGatherInfo': {
     // adultNum: 1,
     // attachmentList: [{
     //   attachId: 14,
@@ -101,11 +147,7 @@ App({
   },
 
   // 本地的数据
-  'state': false && { // false 表示未初始化
-    'orderSn': null, // 辨识 id
-
-    'template': null, // 模板
-
+  'state': {
     'isFirstSubmit': false, // 是否 第一次提交
 
     // terms
@@ -141,10 +183,10 @@ App({
         // 'email': null,
         'mobile': null,
         'isDive': null,
-        'divingCount': null,
+        'divingCount': null, // 100 以下 Number
         'divingNo': null,
-        'divingRank': null,
-        'lastDiveTime': null,
+        'divingRank': null, // 1 2
+        'lastDiveTime': null, // 时间戳 Number
         'anamnesis': null,
       }]
     }],
@@ -167,126 +209,127 @@ App({
     'takeoffTime': null,
   },
 
-  // 由于 初始化数据 是网络请求，可能会在 Page.onLoad 之后才返回，所以此处加入 callback 以防止这种情况。
-  'stateReadyCallback': false,
+  getGatherInfoToState: function (val) {
+    let state;
+    if (val === false) {
+      state = {
+        'isFirstSubmit': true, // 是否 第一次提交
 
-  // 请求 远程服务器的数据
-  getData: function () {
-    const _this = this;
+        // terms
+        'isReadTerms': false, // 是否同意 条款声明
 
-    return new Promise((resolve, reject) => {
+        // reserverInfor 预订人信息
+        'isReserverInforcomplete': false, // 是否 完成 预订人信息
+        'signName': null,
+        'pinyinName': null,
+        'payAccount': null,
+        'mobile': null,
+        'email': null,
 
-      resolve(_this.databaseData); // 假装请求完成
-    });
-  },
-
-  // 远程服务器的数据 转化 本地的数据
-  resolveDataToState: function (val) {
-    let state = {
-      'orderSn': val.orderSn,
-
-      'template': val.template,
-
-      'isFirstSubmit': false, // 是否 第一次提交
+        // roomInfor 房间信息
+        'isRoomInforcomplete': false, // 是否 完成 房间信息
+        'iceName': null,
+        'iceRelation': null,
+        'iceMobile': null,
+        'iceEmail': null,
     
-      // terms
-      'isReadTerms': false, // 是否同意 条款声明
+        'selectRoomNum': null,
+        'selectCustomerNum': null,
     
-      // reserverInfor 预订人信息
-      'isReserverInforcomplete': false, // 是否 完成 预订人信息
-      'signName': val.signName || null,
-      'pinyinName': val.pinyinName || null,
-      'payAccount': val.payAccount || null,
-      'mobile': val.mobile || null,
-      'email': val.email || null,
+        'roomInfoList': [{
+          'bedType': null,
+          'customerInfoList': [{
+            'passportNo': null,
+            'nationality': null,
+            'chineseName': null,
+            'pinyinName': null,
+            'birthday': null,
+            'gender': null, // 1男 2女
+            // 'email': null,
+            'mobile': null,
+            'isDive': null,
+            'divingCount': null, // 100 以下 Number
+            'divingNo': null,
+            'divingRank': null, // 1 2
+            'lastDiveTime': null, // 时间戳 Number
+            'anamnesis': null,
+          }]
+        }],
     
-      // roomInfor 房间信息
-      'isRoomInforcomplete': false, // 是否 完成 房间信息
-
-      'iceName': val.roomInfoList.length ? val.roomInfoList[0].iceName : null,
-      'iceRelation': val.roomInfoList.length ? val.roomInfoList[0].iceRelation : null,
-      'iceMobile': val.roomInfoList.length ? val.roomInfoList[0].iceMobile : null,
-      'iceEmail': val.roomInfoList.length ? val.roomInfoList[0].iceEmail : null,
+        // flightInfor 航班信息
+        'outboundNum': null, // 国际航班号（入境）
+        'landDate': null, // 2018-01-02
+        'landTime': null, // 03:00
     
-      'selectRoomNum': 0,
-      'selectCustomerNum': 0,
-    
-      'roomInfoList': val.roomInfoList.map(room => ({
-        'bedType': room.bedType ? room.bedType : null,
-        'customerInfoList': room.customerInfoList ? room.customerInfoList.map(customer => ({
-          'passportNo': customer.passportNo,
-          'nationality': customer.nationality,
-          'chineseName': customer.chineseName,
-          'pinyinName': customer.pinyinName,
-          'birthday': customer.birthday,
-          'gender': customer.gender, // 1男 2女
-          'email': customer.email,
-          'mobile': customer.mobile,
-          'isDive': customer.isDive,
-          'divingCount': customer.divingCount,
-          'divingNo': customer.divingNo,
-          'divingRank': customer.divingRank,
-          'lastDiveTime': customer.lastDiveTime,
-          'anamnesis': customer.anamnesis,
-        })) : null,
-      })),
-      
-      // flightInfor 航班信息
-      'outboundNum': val.outboundNum ? val.outboundNum : null, // 国际航班号（入境）
-      'landDate': val.landDate ? convertDate.timestampToFormat(val.landDate) : null,
-      'landTime': val.landTime ? convertDate.timestampToHHmm(val.landTime) : null,
-    
-      'inHarbourNum': val.inHarbourNum ? val.inHarbourNum : null, // 到港航班号
-      'hLandDate': val.hLandDate ? convertDate.timestampToFormat(val.hLandDate) : null,
-      'hLandTime': val.hLandTime ? convertDate.timestampToHHmm(val.hLandTime) : null,
-      
-      'outHarbourNum': val.outHarbourNum ? val.outHarbourNum : null, // 离港航班号
-      'hTakeoffDate': val.hTakeoffDate ? convertDate.timestampToFormat(val.hTakeoffDate) : null,
-      'hTakeoffTime': val.hTakeoffTime ? convertDate.timestampToHHmm(val.hTakeoffTime) : null,
-      
-      'inboundNum': val.inboundNum ? val.inboundNum : null, // 国际航班号（出境）
-      'takeoffDate': val.takeoffDate ? convertDate.timestampToFormat(val.takeoffDate) : null,
-      'takeoffTime': val.takeoffTime ? convertDate.timestampToHHmm(val.takeoffTime) : null,
-    };
-
-    return state;
-  },
-
-  // 这边逻辑暂且可不需过于认真
-  init: function (val) {
-    // 初始化 远程服务器数据
-    this.databaseData = val;
-
-    let storageState = wx.getStorageSync('storageState'); // 获取本地数据
-
-    if (storageState && val.orderSn === storageState.orderSn) {
-      this.state = storageState.orderSn;
+        'inHarbourNum': null, // 到港航班号
+        'hLandDate': null,
+        'hLandTime': null,
+        
+        'outHarbourNum': null, // 离港航班号
+        'hTakeoffDate': null,
+        'hTakeoffTime': null,
+        
+        'inboundNum': null, // 国际航班号（出境）
+        'takeoffDate': null,
+        'takeoffTime': null,
+      }
+      this.state = state;
     } else {
-      this.state = this.resolveDataToState(val);
+      state = {
+        'isFirstSubmit': false,
+        'isReadTerms': true,
+
+        'isReserverInforcomplete': true,
+        'signName': val.signName,
+        'pinyinName': val.pinyinName,
+        'payAccount': val.payAccount,
+        'mobile': val.mobile,
+        'email': val.email,
+
+        'isRoomInforcomplete': true,
+        'iceName': val.roomInfoList[0].iceName,
+        'iceRelation': val.roomInfoList[0].iceRelation,
+        'iceMobile': val.roomInfoList[0].iceMobile,
+        'iceEmail': val.roomInfoList[0].iceEmail,
+
+        'selectRoomNum': null,
+        'selectCustomerNum': null,
+
+        'roomInfoList': val.roomInfoList.map(room => ({
+          'bedType': room.bedType ? room.bedType : null,
+          'customerInfoList': room.customerInfoList ? room.customerInfoList.map(customer => ({
+            'passportNo': customer.passportNo,
+            'nationality': customer.nationality,
+            'chineseName': customer.chineseName,
+            'pinyinName': customer.pinyinName,
+            'birthday': customer.birthday,
+            'gender': customer.gender, // 1男 2女
+            'email': customer.email,
+            'mobile': customer.mobile,
+            'isDive': customer.isDive,
+            'divingCount': customer.divingCount,
+            'divingNo': customer.divingNo,
+            'divingRank': customer.divingRank,
+            'lastDiveTime': customer.lastDiveTime ? convertDate.timestampToFormat(customer.lastDiveTime) : '',
+            'anamnesis': customer.anamnesis,
+          })) : null,
+        })),
+
+        'outboundNum': val.outboundNum,
+        'landDate': convertDate.timestampToFormat(val.landDate),
+        'landTime': convertDate.timestampToHHmm(val.landTime),
+        'inHarbourNum': val.inHarbourNum,
+        'hLandDate': convertDate.timestampToFormat(val.hLandDate),
+        'hLandTime': convertDate.timestampToHHmm(val.hLandTime),
+        'outHarbourNum': val.outHarbourNum,
+        'hTakeoffDate': convertDate.timestampToFormat(val.hTakeoffDate),
+        'hTakeoffTime': convertDate.timestampToHHmm(val.hTakeoffTime),
+        'inboundNum': val.inboundNum,
+        'takeoffDate': convertDate.timestampToFormat(val.takeoffDate),
+        'takeoffTime': convertDate.timestampToHHmm(val.takeoffTime),
+      }
     }
-
-    // 执行回调函数 表示初始化已完成
-    this.stateReadyCallback ? this.stateReadyCallback() : null;
-  },
-
-  onLaunch: function () {
-    const _this = this;
-    
-    let storageData = wx.getStorageSync('storageData'); // 获取本地数据
-
-    if (storageData) { // 如果有本地数据, 表示表 信息收集未完成!
-
-      this.init(storageData);
-    } else { // 无本地数据, 则从远端加载数据进来
-      this.getData()
-      .then(
-        val => _this.init(val), 
-        error => wx.showModal({
-          'title': '数据加载失败',
-          'content': `加载远程服务端数据失败! 原因: ${error}`,
-          'showCancel': false
-        })
-      );
-    }
+    this.state = state;
+    wx.setStorageSync('state', state);
   },
 })

@@ -1,20 +1,22 @@
 {
   "pages": [
+    "pages/order/index",
+
     "pages/login/index",
 
-    "pages/home/index",
-    "pages/terms/index",
-    "pages/orderInfor/index",
-    "pages/giftInfor/index",
-    "pages/reserverInfor/index",
+    "pages/infor/home/index",
+    "pages/infor/terms/index",
+    "pages/infor/orderInfor/index",
+    "pages/infor/giftInfor/index",
+    "pages/infor/reserverInfor/index",
 
-    "pages/roomInfor/customer/index",
-    "pages/roomInfor/detail/index",
-    "pages/roomInfor/index",
+    "pages/infor/roomInfor/customer/index",
+    "pages/infor/roomInfor/detail/index",
+    "pages/infor/roomInfor/index",
 
-    "pages/flightInfor/index",
-    "pages/specialNote/index",
-    "pages/result/index"
+    "pages/infor/flightInfor/index",
+    "pages/infor/specialNote/index",
+    "pages/infor/result/index"
   ],
 
   "window": {

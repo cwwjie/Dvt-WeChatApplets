@@ -73,7 +73,7 @@ Page({
     app.state.outHarbourNum = this.data.outHarbourNum; // 离港航班号
     app.state.hTakeoffDate = this.data.hTakeoffDate === '无' ? null : this.data.hTakeoffDate;
     app.state.hTakeoffTime = this.data.hTakeoffTime === '无' ? null : this.data.hTakeoffTime;
-    
+
     app.state.inboundNum = this.data.inboundNum; // 国际航班号（出境）
     app.state.takeoffDate = this.data.takeoffDate === '无' ? null : this.data.takeoffDate;
     app.state.takeoffTime = this.data.takeoffTime === '无' ? null : this.data.takeoffTime;

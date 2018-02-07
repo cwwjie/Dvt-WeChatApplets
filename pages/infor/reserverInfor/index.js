@@ -5,7 +5,7 @@ const app = getApp();
 
 Page({
   'data': {
-    'present': '', // '1' '2' '1,2' 
+    'isFirstSubmit': true, // 是否 第一次提交
 
     'buttonType': 'default',
 
@@ -27,13 +27,14 @@ Page({
 
   onLoad: function () {
     this.setData({
-    'buttonType': app.state.isReserverInforcomplete ? 'primary' : 'default',
+    'isFirstSubmit': app.state.isFirstSubmit,
+    'buttonType': 'primary',
 
-    'signName': app.state.signName, 
-    'pinyinName': app.state.pinyinName, 
+    'signName': app.state.signName ? app.state.signName : app.taobaoItem.signName, 
+    'pinyinName': app.state.pinyinName ? app.state.pinyinName : app.taobaoItem.pinyinName, 
     'payAccount': app.state.payAccount, 
-    'mobile': app.state.mobile, 
-    'email': app.state.email 
+    'mobile': app.state.mobile ? app.state.mobile : app.taobaoItem.mobile, 
+    'email': app.state.email ? app.state.email : app.taobaoItem.email 
     });
   },
 
@@ -200,12 +201,16 @@ Page({
   },
 
   jumpToNext: function () {
-    if (this.data.buttonType === 'primary') {
-      wx.navigateTo({
-        'url': './../roomInfor/index'
-      })
+    if (this.data.isFirstSubmit) {
+      if (this.data.buttonType === 'primary') {
+        wx.navigateTo({
+          'url': './../roomInfor/index'
+        })
+      } else {
+        this.chackAll();
+      }
     } else {
-      this.chackAll();
+      wx.navigateBack();
     }
   }
 })

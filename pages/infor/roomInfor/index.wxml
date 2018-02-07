@@ -5,7 +5,7 @@
       <view wx:for="{{roomInfoList}}" wx:key="{{index}}" class="room-item-content WingBlank">
         <view class="room-item" id="{{index}}" bindtap="jumpToDetail">
           <view class="room-item-header">
-            <image src='./../../assets/hotel.png'></image>
+            <image src='./../../../assets/hotel.png'></image>
             <text class="room-header-tiltle">房间</text>
             <text class="{{item.isComplete ? 'room-header-status' : 'room-header-status NotComplete'}}">{{item.isComplete ? '已完成' : '待完成'}}</text>
           </view>
@@ -21,7 +21,7 @@
         </view>
       </view>
 
-      <view class="room-infor-gather">
+      <view class="room-infor-gather" wx:if="{{template == 3}}">
         <view class="weui-cells__title">紧急联系人信息</view>
         <view class="weui-cells weui-cells_after-title">
 
@@ -79,7 +79,7 @@
 
   <view class="bottom-operate">
     <view class="WingBlank">
-      <button class="weui-btn"  type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
+      <button class="weui-btn"  type="{{buttonType}}" bindtap="jumpToNext">{{isFirstSubmit ? '下一步' : '返回'}}</button>
     </view>
   </view>
 </view>

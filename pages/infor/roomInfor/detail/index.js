@@ -87,7 +87,7 @@ Page({
   countCustomerRest: function () {
     let customerCount = 0;
     let roomInfoList = app.state.roomInfoList;
-    let peopleNum = app.databaseData.peopleNum;
+    let peopleNum = app.taobaoItem.peopleNum;
     let selectRoomNum = app.state.selectRoomNum;
     let thisRoomCustomer = app.state.roomInfoList[selectRoomNum].customerInfoList.length;
 

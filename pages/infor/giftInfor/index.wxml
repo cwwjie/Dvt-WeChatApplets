@@ -60,7 +60,7 @@
 
   <view class="bottom-operate">
     <view class="WingBlank">
-      <button class="weui-btn" type="primary" bindtap="jumpToNext">填写联系人信息</button>
+      <button class="weui-btn" type="primary" bindtap="jumpToNext">{{isFirstSubmit ? '填写联系人信息' : '返回'}}</button>
     </view>
   </view>
 </view>

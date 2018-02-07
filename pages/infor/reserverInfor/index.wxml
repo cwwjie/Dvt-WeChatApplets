@@ -80,7 +80,7 @@
 
   <view class="bottom-operate">
     <view class="WingBlank">
-      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToNext">下一步</button>
+      <button class="weui-btn" type="{{buttonType}}" bindtap="jumpToNext">{{isFirstSubmit ? '下一步' : '返回'}}</button>
     </view>
   </view>
 </view>

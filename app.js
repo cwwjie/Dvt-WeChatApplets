@@ -236,26 +236,6 @@ App({
         'selectRoomNum': null,
         'selectCustomerNum': null,
     
-        'roomInfoList': [{
-          'bedType': null,
-          'customerInfoList': [{
-            'passportNo': null,
-            'nationality': null,
-            'chineseName': null,
-            'pinyinName': null,
-            'birthday': null,
-            'gender': null, // 1男 2女
-            // 'email': null,
-            'mobile': null,
-            'isDive': null,
-            'divingCount': null, // 100 以下 Number
-            'divingNo': null,
-            'divingRank': null, // 1 2
-            'lastDiveTime': null, // 时间戳 Number
-            'anamnesis': null,
-          }]
-        }],
-    
         // flightInfor 航班信息
         'outboundNum': null, // 国际航班号（入境）
         'landDate': null, // 2018-01-02
@@ -273,6 +253,16 @@ App({
         'takeoffDate': null,
         'takeoffTime': null,
       }
+
+      let roomInfoList = [];
+      for (let i = 0; i < this.taobaoItem.roomNum; i++) {
+        roomInfoList.push({
+          'bedType': null,
+          'customerInfoList': []
+        });
+      }
+
+      state.roomInfoList = roomInfoList;
       this.state = state;
     } else {
       state = {

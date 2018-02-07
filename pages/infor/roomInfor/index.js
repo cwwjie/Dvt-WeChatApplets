@@ -16,6 +16,7 @@ let iceRelation = {
 
 Page({
   'data': {
+    'isFirstSubmit': true, // 是否 第一次提交
     'template': '',
 
     'buttonType': 'default',
@@ -38,8 +39,8 @@ Page({
     'iceMobile': '',
     'iceMobileError': '',
 
-    'iceEmail': '',
-    'iceEmailError': '',
+    // 'iceEmail': '',
+    // 'iceEmailError': '',
   },
 
   saveToApp: function () {
@@ -60,7 +61,9 @@ Page({
 
   onLoad: function () {
     this.setData({
-      'template': app.state.template,
+      'isFirstSubmit': app.state.isFirstSubmit,
+
+      'template': app.taobaoItem.template,
 
       'buttonType': app.state.isRoomInforcomplete ? 'primary' : 'default',
 
@@ -84,7 +87,7 @@ Page({
   countCustomerRest: function () {
     let customerCount = 0;
     let roomInfoList = app.state.roomInfoList;
-    let peopleNum = app.databaseData.peopleNum;
+    let peopleNum = app.taobaoItem.peopleNum;
 
     roomInfoList.map(room => customerCount += room.customerInfoList.length);
 
@@ -113,7 +116,38 @@ Page({
     }
   },
 
+  checkRoomInfoList: function () {
+    let roomNum = app.taobaoItem.roomNum;
+    let isFullLoad = true;
+
+    app.state.roomInfoList.map(room => room.customerInfoList.length < 1 ? isFullLoad = false : null);
+
+    if (app.state.roomInfoList.length === roomNum && isFullLoad) {
+      return request.success();
+    }
+    return request.error('房间尚未补充完成!');
+  },
+
   handleAllowNext: function () {
+    let handleAllowIce = this.handleAllowIce();
+    let checkRoomInfoList = this.checkRoomInfoList();
+
+    if (this.data.template === 3) {
+      if (
+        handleAllowIce.result === 1 &&
+        checkRoomInfoList.result === 1
+      ) {
+        return request.success();
+      } else {
+        if (handleAllowIce.result === 1) {
+          return checkRoomInfoList
+        } else {
+          return handleAllowIce
+        }
+      }
+    } else {
+      return checkRoomInfoList;
+    }
   },
 
   showError: function (event) {
@@ -198,21 +232,26 @@ Page({
   },
 
   jumpToNext: function () {
-    if (this.handleAllowNext().result === 1) {
-      wx.navigateTo({
-        'url': './../flightInfor/index'
-      })
-    } else {
-      if (wx.showToast) {
-        wx.showToast({
-          'title': '必须补充完成入住信息',
-          'icon': 'none'
+    if (this.data.isFirstSubmit) {
+      let handleAllowNext = this.handleAllowNext();
+      if (handleAllowNext.result === 1) {
+        wx.navigateTo({
+          'url': './../flightInfor/index'
         })
-
-        setTimeout(function(){
-          wx.hideToast()
-        }, 2000)
+      } else {
+        if (wx.showToast) {
+          wx.showToast({
+            'title': handleAllowNext.message,
+            'icon': 'none'
+          })
+  
+          setTimeout(function(){
+            wx.hideToast()
+          }, 2000)
+        }
       }
+    } else {
+      wx.navigateBack();
     }
   },
 

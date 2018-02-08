@@ -45,9 +45,9 @@ Page({
 
   saveToApp: function () {
     if (this.data.template === 3) {
-      app.state.iceName = this.verifyIceName(this.data.iceName).result === 1 ? this.data.iceName : null;
-      app.state.iceRelation = this.data.iceRelation !== null && this.data.iceRelation !== '' ? iceRelation.toValue(this.data.iceRelation) : null;
-      app.state.iceMobile = this.verifyIceMobile(this.data.iceMobile).result === 1 ? this.data.iceMobile : null;
+      this.verifyIceName(this.data.iceName).result === 1 ? app.state.iceName = this.data.iceName : null;
+      this.data.iceRelation !== null && this.data.iceRelation !== '' ? app.state.iceRelation = iceRelation.toValue(this.data.iceRelation) : null;
+      this.verifyIceMobile(this.data.iceMobile).result === 1 ? app.state.iceMobile = this.data.iceMobile : null;
     }
   },
 
@@ -59,13 +59,11 @@ Page({
     this.saveToApp();
   },
 
-  onLoad: function () {
+  onShow: function () {
     this.setData({
       'isFirstSubmit': app.state.isFirstSubmit,
 
       'template': app.taobaoItem.template,
-
-      'buttonType': app.state.isRoomInforcomplete ? 'primary' : 'default',
 
       'customerRest': this.countCustomerRest(),
 
@@ -81,7 +79,7 @@ Page({
 
       'iceMobile': app.state.iceMobile,
       // 'iceEmail': app.state.iceEmail // 邮箱暂时不用管
-    });
+    }, () => this.handleAllowNext());
   },
 
   countCustomerRest: function () {
@@ -137,8 +135,10 @@ Page({
         handleAllowIce.result === 1 &&
         checkRoomInfoList.result === 1
       ) {
+        this.setData({'buttonType': 'primary'});
         return request.success();
       } else {
+        this.setData({'buttonType': 'default'});
         if (handleAllowIce.result === 1) {
           return checkRoomInfoList
         } else {
@@ -146,6 +146,11 @@ Page({
         }
       }
     } else {
+      if (checkRoomInfoList.result === 1) {
+        this.setData({'buttonType': 'primary'});
+      } else {
+        this.setData({'buttonType': 'default'});
+      }
       return checkRoomInfoList;
     }
   },

@@ -51,7 +51,7 @@ Page({
     const selectCustomerNum = app.state.selectCustomerNum;
     let customerInfoList = {
       'passportNo': this.data.passportNo,
-      'nationality': this.data.nationalityList[this.data.nationality],
+      'nationality': app.nationalityList[this.data.nationality].value,
       'chineseName': this.data.chineseName,
       'pinyinName': this.data.pinyinName,
       'birthday': this.data.birthday,
@@ -63,14 +63,14 @@ Page({
       'divingNo': this.data.divingNo,
       'divingRank': this.data.divingRankList[this.data.divingRank],
       'lastDiveTime': this.data.lastDiveTime === '无' ? null : this.data.lastDiveTime,
-      'anamnesis': this.data.anamnesis,
+      'anamnesis': this.data.anamnesis
     }
 
     if (this.handleAllowNext()) {
       if (IsAdd) {
-        app.state.roomInfoList[selectRoomNum].customerInfoList.push(customerInfoList);
+      app.state.roomInfoList[selectRoomNum].customerInfoList.push(customerInfoList);
       } else {
-        app.state.roomInfoList[selectRoomNum].customerInfoList[selectCustomerNum] = customerInfoList;
+      app.state.roomInfoList[selectRoomNum].customerInfoList[selectCustomerNum] = customerInfoList;
       }
     }
   },
@@ -94,15 +94,17 @@ Page({
   },
 
   onLoad: function () {
+    let state = {};
+
     if (this.checkIsAdd() === false) {
       const selectRoomNum = app.state.selectRoomNum;
       const selectCustomerNum = app.state.selectCustomerNum;
       const selectCustomer = app.state.roomInfoList[selectRoomNum].customerInfoList[selectCustomerNum];
 
-      this.setData({
+      state = {
         'buttonType': 'primary',
         'passportNo': selectCustomer.passportNo,
-        // 'nationality': selectCustomer.nationality,
+        'nationality': app.nationalityList.map(val => val.value).indexOf(selectCustomer.nationality),
         'chineseName': selectCustomer.chineseName,
         'pinyinName': selectCustomer.pinyinName,
         'gender': selectCustomer.gender - 1,
@@ -115,8 +117,12 @@ Page({
         'lastDiveTime': selectCustomer.lastDiveTime ? convertDate.timestampToFormat(selectCustomer.lastDiveTime) : '无',
         'divingNo': selectCustomer.divingNo,
         'anamnesis': selectCustomer.anamnesis
-      });
+      };
     }
+
+    state.nationalityList = app.nationalityList.map(val => val.label);
+
+    this.setData(state);
   },
 
   showError: function (event) {
@@ -268,6 +274,10 @@ Page({
   saveConfirm: function () {
     if (this.data.buttonType === 'primary') {
       wx.navigateBack();
+    } else {
+      this.handleChineseName({detail: {value: this.data.chineseName}});
+      this.handlePinyinName({detail: {value: this.data.pinyinName}});
+      this.handleMobile({detail: {value: this.data.mobile}});
     }
   }
 })

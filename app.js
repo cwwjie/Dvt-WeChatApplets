@@ -1,4 +1,5 @@
 import convertDate from './utils/convertDate';
+import config from './config/index';
 
 //app.js
 App({
@@ -209,6 +210,8 @@ App({
     'takeoffTime': null,
   },
 
+  'nationalityList': [{'value': 'CHINA', 'label': '中国 CHINA'}],
+
   getGatherInfoToState: function (val) {
     let state;
     if (val === false) {
@@ -322,4 +325,37 @@ App({
     this.state = state;
     wx.setStorageSync('state', state);
   },
+
+  initNationality: function() {
+    const _this = this;
+    wx.request({
+      'url': `${config.version}/system/codetype/nationality/getWith.do`,
+      'method': 'GET',
+      'header': { 'content-type': 'application/json' },
+      'dataType': 'json',
+      success: function(res) {
+        let json = res.data;
+
+        if (json.result === '0') {
+          _this.nationalityList = json.data.codeList.map(function(val) {
+            return {
+              'value': val.code,
+              'label': val.codeName
+            }
+          });
+        } else {
+          wx.showModal({
+            title: '国籍初始化加载失败',
+            content: `成功向服务器发起国籍请求, 但是数据有误原因: ${json.message}`
+          });
+        }
+      },
+      fail: function (error) {
+        wx.showModal({
+          title: '国籍初始化加载失败',
+          content: `加载国籍发生错误, 原因: ${error}`
+        });
+      }
+    });
+  }
 })

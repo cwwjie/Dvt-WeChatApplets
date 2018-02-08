@@ -14,14 +14,14 @@
         </view>
       </view>
 
-      <view class="{{pinyinNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
+      <view class="{{chineseNameError !== '' ? 'weui-cell weui-cell_input weui-cell_warn': 'weui-cell weui-cell_input'}}">
         <view class="weui-cell__hd">
           <view class="weui-label">姓名中文</view>
         </view>
         <view class="weui-cell__bd">
           <input class="weui-input" value="{{chineseName}}" bindinput="handleChineseName" placeholder="请输入中文姓名"/>
         </view>
-        <view id="pinyinNameError" class="weui-cell__ft" wx:if="{{chineseNameError !== ''}}" bindtap="showError">
+        <view id="chineseNameError" class="weui-cell__ft" wx:if="{{chineseNameError !== ''}}" bindtap="showError">
           <icon type="warn" size="23" color="#E64340"></icon>
         </view>
       </view>

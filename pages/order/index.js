@@ -102,6 +102,7 @@ Page({
 
   onLoad: function () {
     this.getOrderList();
+    app.initNationality();
   },
 
   operate: function (event) {

@@ -33,7 +33,7 @@ Page({
 
   onLoad: function () {
     this.setData({
-      'template': app.state.template,
+      'template': app.taobaoItem.template,
 
       'outboundNum': app.state.outboundNum, // 国际航班号（入境）
       'landDate': app.state.landDate ? app.state.landDate : '无',

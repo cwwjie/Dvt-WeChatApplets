@@ -12,6 +12,10 @@ Page({
     this.setData(temObj);
   },
 
+  onShow: function () {
+    this.setData({'template': app.taobaoItem.template});
+  },
+
   jumpBack: function () {
     wx.navigateTo({
       'url': './../flightInfor/index'

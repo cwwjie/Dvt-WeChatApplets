@@ -62,14 +62,15 @@ Page({
     const selectRoomNum = app.state.selectRoomNum;
     const customerInfoList = app.state.roomInfoList[selectRoomNum].customerInfoList;
 
+    let myBed = app.state.roomInfoList[selectRoomNum].bedType;
     this.setData({
-      'buttonType': customerInfoList.length > 1 ? 'primary' : 'default',
+      'buttonType': customerInfoList.length >= 1 ? 'primary' : 'default',
 
-      'bedTypeList': bedType.init(app.state.template).map(val => val.label),
+      'bedTypeList': bedType.init(app.taobaoItem.template).map(val => val.label),
 
       'customerRestNum': this.countCustomerRest(),
 
-      'bedType': bedType.toIndex(app.state.roomInfoList[selectRoomNum].bedType),
+      'bedType': myBed ? bedType.toIndex(myBed) : 0,
 
       'customerInfoList': customerInfoList.map(Infor => ({
         'nationality': Infor.nationality,

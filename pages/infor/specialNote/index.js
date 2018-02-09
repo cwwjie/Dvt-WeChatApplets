@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   'data': {
     'template': null,
@@ -13,7 +15,10 @@ Page({
   },
 
   onShow: function () {
-    this.setData({'template': app.taobaoItem.template});
+    this.setData({
+      'isFirstSubmit': app.state.isFirstSubmit,
+      'template': app.taobaoItem.template
+    });
   },
 
   jumpBack: function () {
@@ -23,14 +28,18 @@ Page({
   },
 
   jumpToNext: function () {
-    if (wx.reLaunch) {
-      wx.reLaunch({
-        'url': './../result/index'
-      })
+    if (this.data.isFirstSubmit) {
+      if (wx.reLaunch) {
+        wx.reLaunch({
+          'url': './../result/index'
+        })
+      } else {
+        wx.navigateTo({
+          'url': './../result/index'
+        })
+      }
     } else {
-      wx.navigateTo({
-        'url': './../result/index'
-      })
+      wx.navigateBack();
     }
   },
 })

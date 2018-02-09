@@ -30,7 +30,15 @@ Page({
     let state = app.state;
 
     if (JSON.stringify(state) != JSON.stringify(storageState)) {
-
+      if (wx.reLaunch) {
+        wx.reLaunch({
+          'url': './../result/index'
+        })
+      } else {
+        wx.navigateTo({
+          'url': './../result/index'
+        })
+      }
     } else {
       wx.showToast({
         title: '未修改任何信息, 不需要进行提交!',

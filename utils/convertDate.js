@@ -36,6 +36,16 @@ export default {
     let myDateList = data.split("-");
     return Date.parse(new Date(myDateList[0], (parseInt(myDateList[1]) - 1), myDateList[2]));
   },
+
+  // xx:xx 字符串 转换 时间戳
+  HHmmToTimestamp (data) {
+    let myDateList = data.split(":");
+
+    let hour = parseInt(myDateList[0]);
+    let time = parseInt(myDateList[1]);
+
+    return ((hour * 60 * 60 * 1000 ) + ( time * 60 * 1000 ));
+  },
   
   // Date 转换 20180102 字符串
   dateToYYYYmmNumber (myDate) {

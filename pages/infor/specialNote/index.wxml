@@ -561,7 +561,7 @@
 
   <view class="bottom-operate">
     <view class="WingBlank">
-      <button class="weui-btn" type="primary" bindtap="jumpToNext">提交</button>
+      <button class="weui-btn" type="primary" bindtap="jumpToNext">{{isFirstSubmit ? '提交' : '返回'}}</button>
     </view>
   </view>
 </view>

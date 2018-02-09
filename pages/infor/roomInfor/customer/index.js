@@ -8,6 +8,11 @@ Page({
   'data': {
     'buttonType': 'default',
 
+    'isKid': false,
+
+    'roomId': null,
+    'customerId': null, 
+
     'passportNo': '',
 
     'nationalityList': ['正在加载'],
@@ -27,7 +32,7 @@ Page({
     'mobile': '',
     'mobileError': '',
 
-    // 'email': '',
+    'email': '',
     // 'emailError': '',
 
     'isDive': false, // 是否深潜？ 'N' 'Y' 最终上传的数据
@@ -49,7 +54,13 @@ Page({
     const IsAdd = this.checkIsAdd();
     const selectRoomNum = app.state.selectRoomNum;
     const selectCustomerNum = app.state.selectCustomerNum;
+    let divingCount = parseInt(divingCount);
+    
     let customerInfoList = {
+      'roomId': this.data.roomId,
+      'customerId': this.data.customerId,
+      'isKid': 'N',
+
       'passportNo': this.data.passportNo,
       'nationality': app.nationalityList[this.data.nationality].value,
       'chineseName': this.data.chineseName,
@@ -59,10 +70,10 @@ Page({
       // 'email': this.data.email,
       'mobile': this.data.mobile,
       'isDive': this.data.isDive ? 'Y' : 'N',
-      'divingCount': this.data.divingCount,
+      'divingCount': divingCount > 100 ? 100 : divingCount,
       'divingNo': this.data.divingNo,
-      'divingRank': this.data.divingRankList[this.data.divingRank],
-      'lastDiveTime': this.data.lastDiveTime === '无' ? null : this.data.lastDiveTime,
+      'divingRank': this.data.divingRank === 0 ? null : this.data.divingRank,
+      'lastDiveTime': this.data.lastDiveTime === '无' ? null : convertDate.YYYYMMDDFormatToTimestamp(this.data.lastDiveTime),
       'anamnesis': this.data.anamnesis
     }
 
@@ -93,7 +104,8 @@ Page({
     this.saveToApp();
   },
 
-  onLoad: function () {
+  onShow: function () {
+    const _this = this;
     let state = {};
 
     if (this.checkIsAdd() === false) {
@@ -103,6 +115,9 @@ Page({
 
       state = {
         'buttonType': 'primary',
+        'isKid': selectCustomer.isKid ? selectCustomer.isKid : 'N', 
+        'roomId': selectCustomer.roomId ? selectCustomer.roomId : null,
+        'customerId': selectCustomer.customerId ? selectCustomer.customerId : null, 
         'passportNo': selectCustomer.passportNo,
         'nationality': app.nationalityList.map(val => val.value).indexOf(selectCustomer.nationality),
         'chineseName': selectCustomer.chineseName,
@@ -110,7 +125,7 @@ Page({
         'gender': selectCustomer.gender - 1,
         'birthday': selectCustomer.birthday,
         'mobile': selectCustomer.mobile,
-        'email': selectCustomer.email,
+        'email': selectCustomer.email ? selectCustomer.email : null,
         'isDive': selectCustomer.isDive === 'Y' ? true : false,
         'divingRank': this.data.divingRankList.indexOf(selectCustomer.divingRank),
         'divingCount': selectCustomer.divingCount,
@@ -118,11 +133,26 @@ Page({
         'divingNo': selectCustomer.divingNo,
         'anamnesis': selectCustomer.anamnesis
       };
+    } else {
+      wx.showModal({
+        'title': '提示',
+        'content': '请问您添加入住人员的类型是?',
+        'confirmText': '成人',
+        'cancelText': '小孩',
+        success: function(res) {
+          if (res.confirm) {
+            _this.setData({'isKid': 'N'});
+          } else if (res.cancel) {
+            _this.setData({'isKid': 'Y'});
+          }
+        }
+      })
     }
 
     state.nationalityList = app.nationalityList.map(val => val.label);
 
     this.setData(state);
+
   },
 
   showError: function (event) {
@@ -139,16 +169,29 @@ Page({
   },
 
   handleAllowNext: function () {
-    if (
-      this.verifyChineseName(this.data.chineseName).result === 1 &&
-      this.verifyPinyinName(this.data.pinyinName).result === 1 &&
-      this.verifyMobile(this.data.mobile).result === 1
-    ) {
-      this.setData({ 'buttonType': 'primary' });
-      return true
+    if (this.data.isKid === 'N') {
+      if (
+        this.verifyChineseName(this.data.chineseName).result === 1 &&
+        this.verifyPinyinName(this.data.pinyinName).result === 1 &&
+        this.verifyMobile(this.data.mobile).result === 1
+      ) {
+        this.setData({ 'buttonType': 'primary' });
+        return true
+      } else {
+        this.setData({ 'buttonType': 'default' });
+        return false
+      }
     } else {
-      this.setData({ 'buttonType': 'default' });
-      return false
+      if (
+        this.verifyChineseName(this.data.chineseName).result === 1 &&
+        this.verifyPinyinName(this.data.pinyinName).result === 1
+      ) {
+        this.setData({ 'buttonType': 'primary' });
+        return true
+      } else {
+        this.setData({ 'buttonType': 'default' });
+        return false
+      }
     }
   },
 

@@ -173,8 +173,13 @@ App({
     'selectCustomerNum': null,
 
     'roomInfoList': [{
+      'infoId': null,
+      'roomId': null,
       'bedType': null,
       'customerInfoList': [{
+        'roomId': null,
+        'customerId': null,
+
         'passportNo': null,
         'nationality': null,
         'chineseName': null,
@@ -260,6 +265,8 @@ App({
       let roomInfoList = [];
       for (let i = 0; i < this.taobaoItem.roomNum; i++) {
         roomInfoList.push({
+          'infoId': null,
+          'roomId': null,
           'bedType': null,
           'customerInfoList': []
         });
@@ -289,8 +296,14 @@ App({
         'selectCustomerNum': null,
 
         'roomInfoList': val.roomInfoList.map(room => ({
+          'infoId': room.infoId,
+          'roomId': room.roomId,
           'bedType': room.bedType ? room.bedType : null,
           'customerInfoList': room.customerInfoList ? room.customerInfoList.map(customer => ({
+            'roomId': customer.roomId,
+            'customerId': customer.customerId, 
+            'isKid': customer.isKid,
+
             'passportNo': customer.passportNo,
             'nationality': customer.nationality,
             'chineseName': customer.chineseName,
@@ -309,17 +322,17 @@ App({
         })),
 
         'outboundNum': val.outboundNum,
-        'landDate': convertDate.timestampToFormat(val.landDate),
-        'landTime': convertDate.timestampToHHmm(val.landTime),
+        'landDate': val.landDate ? convertDate.timestampToFormat(val.landDate) : null,
+        'landTime': val.landTime ? convertDate.timestampToHHmm(val.landTime) : null,
         'inHarbourNum': val.inHarbourNum,
-        'hLandDate': convertDate.timestampToFormat(val.hLandDate),
-        'hLandTime': convertDate.timestampToHHmm(val.hLandTime),
+        'hLandDate': val.hLandDate ? convertDate.timestampToFormat(val.hLandDate) : null,
+        'hLandTime': val.hLandTime ? convertDate.timestampToHHmm(val.hLandTime) : null,
         'outHarbourNum': val.outHarbourNum,
-        'hTakeoffDate': convertDate.timestampToFormat(val.hTakeoffDate),
-        'hTakeoffTime': convertDate.timestampToHHmm(val.hTakeoffTime),
+        'hTakeoffDate': val.hTakeoffDate ? convertDate.timestampToFormat(val.hTakeoffDate) : null,
+        'hTakeoffTime': val.hTakeoffTime ? convertDate.timestampToHHmm(val.hTakeoffTime) : null,
         'inboundNum': val.inboundNum,
-        'takeoffDate': convertDate.timestampToFormat(val.takeoffDate),
-        'takeoffTime': convertDate.timestampToHHmm(val.takeoffTime),
+        'takeoffDate': val.takeoffDate ? convertDate.timestampToFormat(val.takeoffDate) : null,
+        'takeoffTime': val.takeoffTime ? convertDate.timestampToHHmm(val.takeoffTime) : null,
       }
     }
     this.state = state;
@@ -357,5 +370,97 @@ App({
         });
       }
     });
+  },
+
+  stateToSubmitData: function() {
+    let submitData = {};
+    if (this.state.isFirstSubmit) {
+      submitData = {
+        'adultNum': this.taobaoItem.adultNum,
+        'calMethod': this.taobaoItem.calMethod,
+        'childNum': this.taobaoItem.childNum,
+        'orderDesc': this.taobaoItem.orderDesc,
+        'payStatus': this.taobaoItem.payStatus,
+        'productAmount': this.taobaoItem.productAmount,
+        'flightNote': '',
+        'infoId': this.taobaoItem.infoId,
+        'isRead': 'Y',
+        'readTime': null,
+        'orderSn': this.taobaoItem.orderSn,
+        'orderSrc': this.taobaoItem.orderSrc,
+        'template': this.taobaoItem.template,
+        'orderName': this.taobaoItem.orderName,
+        'roomNum': this.taobaoItem.roomNum,
+        'peopleNum': this.taobaoItem.peopleNum,
+        'checkIn': this.taobaoItem.checkIn,
+        'checkOut': this.taobaoItem.checkOut,
+        'orderAmount': this.taobaoItem.orderAmount,
+        'discount': this.taobaoItem.discount,
+        'payAmount': this.taobaoItem.payAmount,
+        'notPayAmount': this.taobaoItem.notPayAmount,
+        'present': this.taobaoItem.present,
+        'remark': this.taobaoItem.remark,
+        'kidsAge': this.taobaoItem.kidsAge,
+        'insuranceBegin': this.taobaoItem.insuranceBegin,
+        'insuranceEnd': this.taobaoItem.insuranceEnd,
+        'reservationCode': this.taobaoItem.reservationCode,
+      }
+    } else {
+      submitData = this.getGatherInfo;
+    }
+
+    submitData.payAccount = this.state.payAccount;
+    submitData.signName = this.state.signName;
+    submitData.pinyinName = this.state.pinyinName;
+    submitData.mobile = this.state.mobile;
+    submitData.email = this.state.email;
+
+    submitData.outboundNum = this.state.outboundNum; // 国际航班号（入境）
+    submitData.landDate = this.state.landDate ? convertDate.YYYYMMDDFormatToTimestamp(this.state.landDate) : null;
+    submitData.landTime = this.state.landTime ? convertDate.HHmmToTimestamp(this.state.landTime) : null;
+
+    submitData.inHarbourNum = this.state.inHarbourNum; // 到港航班号
+    submitData.hLandDate = this.state.hLandDate ? convertDate.YYYYMMDDFormatToTimestamp(this.state.hLandDate) : null;
+    submitData.hLandTime = this.state.hLandTime ? convertDate.HHmmToTimestamp(this.state.hLandTime) : null;
+    
+    submitData.outHarbourNum = this.state.outHarbourNum; // 离港航班号
+    submitData.hTakeoffDate = this.state.hTakeoffDate ? convertDate.YYYYMMDDFormatToTimestamp(this.state.hTakeoffDate) : null;
+    submitData.hTakeoffTime = this.state.hTakeoffTime ? convertDate.HHmmToTimestamp(this.state.hTakeoffTime) : null;
+    
+    submitData.inboundNum = this.state.inboundNum; // 国际航班号（出境）
+    submitData.takeoffDate = this.state.takeoffDate ? convertDate.YYYYMMDDFormatToTimestamp(this.state.takeoffDate) : null;
+    submitData.takeoffTime = this.state.takeoffTime ? convertDate.HHmmToTimestamp(this.state.takeoffTime) : null;
+
+    submitData.roomInfoList = this.state.roomInfoList.map(room => ({
+      'infoId': room.infoId,
+      'roomId': room.roomId,
+      'bedType': room.bedType,
+      'iceName': this.state.iceName ? this.state.iceName : this.state.signName,
+      'iceRelation': this.state.iceRelation,
+      'iceMobile': this.state.iceMobile ? this.state.iceMobile : this.state.mobile,
+      'iceEmail': this.state.iceEmail ? this.state.iceEmail : this.state.email,
+      'customerInfoList': room.customerInfoList.map(customer => ({
+        'roomId': customer.roomId,
+        'customerId': customer.customerId, 
+        'isKid': customer.isKid, 
+
+        'passportNo': customer.passportNo,
+        'nationality': customer.nationality,
+        'chineseName': customer.chineseName,
+        'pinyinName': customer.pinyinName,
+        'birthday': customer.birthday,
+        'gender': customer.gender,
+        'email': customer.email ? customer.email : this.state.email,
+        'mobile': customer.mobile ? customer.mobile : this.state.mobile,
+        'isDive': customer.isDive,
+        'divingCount': customer.divingCount,
+        'divingNo': customer.divingNo,
+        'divingRank': customer.divingRank,
+        'lastDiveTime': customer.lastDiveTime,
+        'anamnesis': customer.anamnesis,
+      }))
+    }));
+
+    return submitData
   }
 })

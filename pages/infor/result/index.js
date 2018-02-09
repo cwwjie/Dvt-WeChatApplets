@@ -1,17 +1,17 @@
-Page({
+import config from './../../../config/index';
 
-  /**
-   * 页面的初始数据
-   */
+const app = getApp();
+
+Page({
   'data': {
-    'status': 'failure', // success failure waiting
+    'status': 'waiting', // success failure waiting
     'error': 'waiting'
   },
 
   copyError: function () {
     if (wx.setClipboardData) {
       wx.setClipboardData({
-        data: 'data', // 错误信息放置在这里
+        data: app.stateToSubmitData(), // 错误信息放置在这里
         success: function(res) {
           wx.showToast({
             title: '复制错误信息!',
@@ -32,68 +32,114 @@ Page({
   returnToHomePage: function () {
     if (wx.reLaunch) {
       wx.reLaunch({
-        'url': './../home/index'
+        'url': './../../order/index'
       })
     } else {
       wx.navigateTo({
-        'url': './../home/index'
+        'url': './../../order/index'
       })
     }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  ajaxSubmit: function(data) {
+    return new Promise((resolve, reject) => {
+
+      wx.request({
+        'url': `${config.version}/gather/${app.taobaoItem.uniqueKey}/gather.do`,
+        'method': 'POST',
+        'header': { 
+          'content-type': 'application/json',
+          'token': wx.getStorageSync('token'), 
+          'digest': wx.getStorageSync('digest')
+        },
+        'dataType': 'json',
+        'data': JSON.stringify(data),
+        success: res => resolve(res.data),
+        fail: error => reject(error)
+      });
+    });
+  },
+
+  ajaxUpdate: function(data) {
+    return new Promise((resolve, reject) => {
+
+      wx.request({
+        'url': `${config.version}/gather/${app.taobaoItem.uniqueKey}/updateForm.do`,
+        'method': 'POST',
+        'header': { 
+          'content-type': 'application/json',
+          'token': wx.getStorageSync('token'), 
+          'digest': wx.getStorageSync('digest')
+        },
+        'dataType': 'json',
+        'data': JSON.stringify(data),
+        success: res => resolve(res.data),
+        fail: error => reject(error)
+      });
+    });
+  },
+
+  resultToErrorMessage: function (val) {
+    if (val.result == '2') {
+      return '非常抱歉，该链接已经失效!';
+    } else if (val.result == '3') {
+      return '非常抱歉，无法进行数据修改!';
+    } else if (val.result == '100') {
+      return '非常抱歉，无法进行数据修改!';
+    } else if (val.result == '100') {
+      return `非常抱歉，数据在提交时发生错误! 原因: ${val.message}`;
+    } else {
+      return `非常抱歉，服务器返回一个错误! 原因: ${val.message}`;
+    }
+  },
+
   onLoad: function (options) {
+    const _this = this;
+    let submitData = app.stateToSubmitData();
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
+    wx.showLoading({ 'title': '正在加载', 'mask': true });
+    if (app.state.isFirstSubmit) {
+      this.ajaxSubmit(submitData)
+      .then(val => {
+        if (val.result == '0') {
+          _this.setData({
+            'status': 'success'
+          });
+        } else {
+          _this.setData({
+            'status': 'failure',
+            'error': _this.resultToErrorMessage(val)
+          });
+        }
+        wx.hideLoading();
+      }, error => {
+        wx.hideLoading();
+        _this.setData({
+          'status': 'failure',
+          'error': `提交数据发生错误, 原因${error}`
+        });
+      });
+    } else {
+      this.ajaxUpdate(submitData)
+      .then(val => {
+        if (val.result == '0') {
+          _this.setData({
+            'status': 'success'
+          });
+        } else {
+          _this.setData({
+            'status': 'failure',
+            'error': _this.resultToErrorMessage(val)
+          });
+        }
+        wx.hideLoading();
+      }, error => {
+        wx.hideLoading();
+        _this.setData({
+          'status': 'failure',
+          'error': `提交数据发生错误, 原因${error}`
+        });
+      });
+    }
   }
 })

@@ -1,5 +1,7 @@
 const app = getApp();
 
+import convertDate from './../../../utils/convertDate';
+
 Page({
   'data': {
     'template': null,
@@ -32,8 +34,19 @@ Page({
   },
 
   onLoad: function () {
+    let checkIn = app.taobaoItem.checkIn;
+    let checkOut = app.taobaoItem.checkOut;
+    let cycleLength = Math.floor((checkOut - checkIn)/86400000);
+
     this.setData({
+      'isFirstSubmit': app.state.isFirstSubmit,
       'template': app.taobaoItem.template,
+
+      'flightinfor': {
+        'checkIn': convertDate.timestampToFormat(checkIn),
+        'checkOut': convertDate.timestampToFormat(checkOut),
+        'cycleLength': cycleLength
+      },
 
       'outboundNum': app.state.outboundNum, // 国际航班号（入境）
       'landDate': app.state.landDate ? app.state.landDate : '无',
@@ -88,8 +101,12 @@ Page({
   },
 
   jumpToNext: function () {
-    wx.navigateTo({
-      'url': './../specialNote/index'
-    })
+    if (this.data.isFirstSubmit) {
+      wx.navigateTo({
+        'url': './../specialNote/index'
+      });
+    } else {
+      wx.navigateBack();
+    }
   }
 })

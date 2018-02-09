@@ -44,6 +44,12 @@ Page({
   },
 
   saveToApp: function () {
+    if (this.handleAllowNext().result === 1) {
+      app.state.isRoomInforcomplete = true;
+    } else {
+      app.state.isRoomInforcomplete = false;
+    }
+
     if (this.data.template === 3) {
       this.verifyIceName(this.data.iceName).result === 1 ? app.state.iceName = this.data.iceName : null;
       this.data.iceRelation !== null && this.data.iceRelation !== '' ? app.state.iceRelation = iceRelation.toValue(this.data.iceRelation) : null;

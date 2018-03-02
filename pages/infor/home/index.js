@@ -22,6 +22,11 @@ Page({
   },
 
   onLoad: function () {
+    if (app.state.isFirstSubmit && app.state.isReadTerms === false) {
+      wx.navigateTo({
+        url: './../terms/index'
+      });
+    } 
     this.init();
   },
 

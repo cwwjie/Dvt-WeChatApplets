@@ -29,7 +29,7 @@
         </view> 
       </view>
       <view class="weui-form-preview__ft">
-        <view id="{{index}}" bindtap="operate" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">编辑</view>
+        <view id="{{index}}" bindtap="operate" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">{{item.infoId === null ? '填写出行信息' : '查看/编辑'}}</view>
       </view>
     </view>
   </view>
